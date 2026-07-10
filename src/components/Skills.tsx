@@ -18,8 +18,8 @@ const GROUPS: Group[] = [
     name: 'Frontend',
     icon: '01',
     skills: [
-      { name: 'React', level: 88 },
-      { name: 'JavaScript', level: 85 },
+      { name: 'React', level: 80 },
+      { name: 'JavaScript', level: 80 },
       { name: 'HTML / CSS', level: 90 },
     ],
   },
@@ -27,7 +27,7 @@ const GROUPS: Group[] = [
     name: 'Backend',
     icon: '02',
     skills: [
-      { name: 'Java', level: 86 },
+      { name: 'Java', level: 80 },
       { name: 'Node.js', level: 78 },
       { name: 'Oracle SQL', level: 82 },
     ],
@@ -36,8 +36,8 @@ const GROUPS: Group[] = [
     name: 'Systems',
     icon: '03',
     skills: [
-      { name: 'C', level: 80 },
-      { name: 'Linux', level: 87 },
+      { name: 'C', level: 75 },
+      { name: 'Linux', level: 75 },
       { name: 'Bash', level: 75 },
     ],
   },
@@ -46,7 +46,7 @@ const GROUPS: Group[] = [
     icon: '04',
     skills: [
       { name: 'Git', level: 84 },
-      { name: 'Security / CTF', level: 72 },
+      { name: 'Security / CTF', level: 20 },
       { name: 'Problem Solving', level: 92 },
     ],
   },
