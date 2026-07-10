@@ -30,14 +30,21 @@ const PROJECTS: Project[] = [
     github: 'https://github.com/Wahidkherchache',
     status: 'shipped',
     pos: 'P2',
-  },
-  {
+  },{
+    name: 'Dashboard F1',
+    tech: ['React','Vite', 'JavaScript'],
+    description:
+      'A real-time dashboard for F1 data visualization — live race updates, driver statistics, and team performance metrics. Built with React and modern web technologies.',
+    github: 'https://github.com/Wahidkherchache/f1-Dashboard',
+    status: 'shipped',
+    pos: 'P3',
+  },{
     name: 'Full-Stack Project',
     tech: ['Coming Soon'],
     description:
       'Currently on the jacks in the garage. A full-stack application with auth, real-time data, and a clean API. Provisional build — expect green-flag racing soon.',
     status: 'garage',
-    pos: 'P3',
+    pos: 'P4',
   },
 ];
 
