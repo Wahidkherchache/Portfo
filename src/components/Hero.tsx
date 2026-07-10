@@ -81,7 +81,7 @@ export default function Hero() {
           >
             <span className="h-px w-10 bg-ferrari-red" />
             <span className="font-mono text-[0.7rem] md:text-xs tracking-[0.4em] text-ferrari-gold uppercase">
-              USTHB · Algiers, DZ
+              USTHB · Algiers
             </span>
           </motion.div>
 

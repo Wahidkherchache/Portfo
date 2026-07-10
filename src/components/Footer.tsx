@@ -61,7 +61,7 @@ export default function Footer() {
         >
           <span>© 2026 ABDELOUAHID KHERCHACHE. ALL LAPS RESERVED.</span>
           <span className="uppercase tracking-[0.3em]">
-            USTHB · Algiers, DZ
+            USTHB · Algiers
           </span>
         </motion.div>
       </div>

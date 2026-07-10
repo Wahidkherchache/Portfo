@@ -5,14 +5,14 @@ import SectionHeading from './SectionHeading';
 import { swipeIn, riseIn } from '../utils/motion';
 
 const TERMINAL_LINES = [
-  { text: '$ ./wahid --info', cmd: true },
+  { text: '$ ./Abd elouahid --info', cmd: true },
   { text: '> loading profile... done', muted: true },
   { text: '> name: Abdelouahid Kherchache' },
   { text: '> alias: Wahid' },
   { text: '> location: Algiers, Algeria', icon: 'pin' },
-  { text: '> education: USTHB — L2 → L3 CS', icon: 'edu' },
+  { text: '> education: USTHB — L3 CS', icon: 'edu' },
   { text: '> focus: Full-Stack + Security', icon: 'code' },
-  { text: '> interests: F1, Linux, CTFs', icon: 'heart' },
+  { text: '> interests: F1, Linux', icon: 'heart' },
   { text: '> status: READY', cmd: true, accent: true },
 ];
 
@@ -67,7 +67,7 @@ export default function About() {
                   </div>
                   <div className="flex-1 flex items-center justify-center gap-2 text-ferrari-smoke/40 font-mono text-xs">
                     <Terminal size={12} />
-                    <span>wahid@scuderia:~</span>
+                    <span>ouahid@scuderia:~</span>
                   </div>
                 </div>
                 <div className="p-4 md:p-6 min-h-[260px] md:min-h-[300px] font-mono text-sm relative scanlines">

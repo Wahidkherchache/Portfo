@@ -82,7 +82,7 @@ export default function Navbar() {
               </div>
             </div>
             <span className="font-display tracking-[0.3em] text-sm text-ferrari-smoke hidden sm:block">
-              WAHID
+              OUAHID
             </span>
           </button>
 
