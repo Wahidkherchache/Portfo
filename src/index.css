@@ -188,3 +188,7 @@ body {
 a, button {
   outline: none;
 }
+
+section {
+  scroll-margin-top: 5rem;
+}

@@ -52,9 +52,22 @@ export default function Navbar() {
     }
   }, [active, open]);
 
+  const MENU_CLOSE_DELAY = 280;
+
   const go = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    const nav = document.querySelector('nav');
+    const headerHeight = nav ? nav.getBoundingClientRect().height : 64;
+
     setOpen(false);
+    window.setTimeout(() => {
+      window.scrollTo({
+        top: target.offsetTop - headerHeight,
+        behavior: 'smooth',
+      });
+    }, MENU_CLOSE_DELAY);
   };
 
   return (
@@ -70,8 +83,12 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-          <button
-            onClick={() => go('hero')}
+          <a
+            href="#hero"
+            onClick={(e) => {
+              e.preventDefault();
+              go('hero');
+            }}
             className="flex items-center gap-2 group"
             aria-label="Back to top"
           >
@@ -84,20 +101,24 @@ export default function Navbar() {
             <span className="font-display tracking-[0.3em] text-sm text-ferrari-smoke hidden sm:block">
               OUAHID
             </span>
-          </button>
+          </a>
 
           <div className="hidden md:flex items-center relative">
             {NAV.map((n) => (
-              <button
+              <a
                 key={n.id}
                 data-nav={n.id}
-                onClick={() => go(n.id)}
+                href={`#${n.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  go(n.id);
+                }}
                 className={`px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] transition-colors ${
                   active === n.id ? 'text-ferrari-gold' : 'text-ferrari-smoke/70 hover:text-ferrari-smoke'
                 }`}
               >
                 {n.label}
-              </button>
+              </a>
             ))}
             <motion.div
               className="absolute -bottom-0.5 h-0.5 bg-red-gradient"
@@ -127,15 +148,19 @@ export default function Navbar() {
             >
               <div className="flex flex-col px-4 py-2">
                 {NAV.map((n) => (
-                  <button
+                  <a
                     key={n.id}
-                    onClick={() => go(n.id)}
+                    href={`#${n.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      go(n.id);
+                    }}
                     className={`text-left py-3 font-mono text-sm uppercase tracking-[0.2em] border-b border-ferrari-pit-border/60 ${
                       active === n.id ? 'text-ferrari-gold' : 'text-ferrari-smoke/80'
                     }`}
                   >
                     {n.label}
-                  </button>
+                  </a>
                 ))}
               </div>
             </motion.div>
