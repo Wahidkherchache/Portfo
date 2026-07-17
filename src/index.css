@@ -3,72 +3,172 @@
 @tailwind utilities;
 
 :root {
-  --rosso: #DC0000;
-  --rosso-dark: #A80000;
-  --rosso-bright: #FF1E1E;
-  --carbon: #0A0A0A;
-  --carbon-2: #0E0E0E;
-  --gold: #C8A84B;
-  --gold-bright: #E6C66C;
-  --smoke: #F0F0F0;
-  --pit: #1A1A1A;
-  --pit-light: #222222;
-  --pit-border: #2A2A2A;
+  --ferrari-red: 220 0 0;
+  --ferrari-red-dark: 168 0 0;
+  --ferrari-red-bright: 255 30 30;
+  --ferrari-carbon: 10 10 10;
+  --ferrari-carbon2: 14 14 14;
+  --ferrari-gold: 200 168 75;
+  --ferrari-gold-bright: 230 198 108;
+  --ferrari-smoke: 240 240 240;
+  --ferrari-pit: 26 26 26;
+  --ferrari-pit-light: 34 34 34;
+  --ferrari-pit-border: 42 42 42;
+  --background: 10 10 10;
+  --foreground: 240 240 240;
+  --surface: 15 15 15;
+  --surface-strong: 20 20 20;
 }
 
+.light {
+  --ferrari-red: 190 42 42;
+  --ferrari-red-dark: 140 20 20;
+  --ferrari-red-bright: 228 75 75;
+  --ferrari-carbon: 248 248 248;
+  --ferrari-carbon2: 252 252 252;
+  --ferrari-gold: 166 140 70;
+  --ferrari-gold-bright: 205 174 90;
+  --ferrari-smoke: 78 78 78;
+  --ferrari-pit: 251 251 248;
+  --ferrari-pit-light: 255 255 255;
+  --ferrari-pit-border: 232 232 232;
+  --background: 253 253 250;
+  --foreground: 40 40 40;
+  --surface: 255 255 255;
+  --surface-strong: 247 247 246;
+}
 html {
   scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
+  /* -webkit-text-size-adjust: 100%; */
 }
 
 body {
   margin: 0;
-  background-color: var(--carbon);
-  color: var(--smoke);
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
   font-family: 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   cursor: auto;
+  background-image:
+    radial-gradient(circle at top left, rgba(220, 0, 0, 0.12), transparent 18%),
+    radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.06), transparent 22%),
+    linear-gradient(145deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(35deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: cover, cover, 18px 18px, 18px 18px;
 }
 
+.light body {
+    background-image:
+      radial-gradient(circle at top left, rgba(220, 0, 0, 0.04), transparent 18%),
+      radial-gradient(circle at 80% 10%, rgba(0, 0, 0, 0.02), transparent 22%),
+      linear-gradient(145deg, rgba(0,0,0,0.01) 1px, transparent 1px),
+      linear-gradient(35deg, rgba(0,0,0,0.01) 1px, transparent 1px);
+  }
 ::-webkit-scrollbar {
   width: 10px;
+  border-radius: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: rgb(var(--ferrari-carbon));
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #DC0000, #A80000);
-  border-radius: 0;
+  background: linear-gradient(180deg, rgb(var(--ferrari-red)), rgb(var(--ferrari-red-dark)));
+  border-radius: 8px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #FF1E1E, #DC0000);
+  background: linear-gradient(180deg, rgb(var(--ferrari-red-bright)), rgb(var(--ferrari-red)));
 }
 
 ::selection {
-  background: var(--rosso);
-  color: #fff;
+  background: rgb(var(--ferrari-red));
+  color: rgb(var(--foreground));
 }
 
 /* ============ Carbon fiber pattern ============ */
 @layer utilities {
   .carbon-bg {
-    background-color: #0a0a0a;
+    background-color: rgb(var(--ferrari-carbon));
     background-image:
-      linear-gradient(27deg, #151515 5px, transparent 5px),
-      linear-gradient(207deg, #151515 5px, transparent 5px),
-      linear-gradient(117deg, #0e0e0e 5px, transparent 5px),
-      linear-gradient(297deg, #0e0e0e 5px, transparent 5px),
-      linear-gradient(0deg, #0a0a0a, #0c0c0c);
-    background-size: 20px 20px;
-    background-position: 0 0, 10px 10px, 10px 0, 0 10px, 0 0;
+      radial-gradient(circle at top left, rgba(220, 0, 0, 0.1), transparent 20%),
+      radial-gradient(circle at center right, rgba(255, 255, 255, 0.05), transparent 24%),
+      linear-gradient(30deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(120deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(0deg, rgb(var(--ferrari-carbon)), rgb(var(--ferrari-carbon2)));
+    background-size: 100% 100%, 100% 100%, 22px 22px, 22px 22px, 100% 100%;
+  }
+
+  .light .carbon-bg {
+    background-color: rgb(var(--ferrari-pit));
+    background-image:
+      radial-gradient(circle at top left, rgba(220, 0, 0, 0.05), transparent 20%),
+      radial-gradient(circle at center right, rgba(0, 0, 0, 0.03), transparent 24%),
+      linear-gradient(30deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(120deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(0deg, rgb(var(--ferrari-pit)), rgb(var(--ferrari-pit-light)));
+    background-size: 100% 100%, 100% 100%, 22px 22px, 22px 22px, 100% 100%;
+  }
+
+  .light .carbon-grid {
+    background-color: rgb(var(--ferrari-pit));
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 60px 60px, 60px 60px, 24px 24px, 24px 24px;
+  }
+
+  .light .terminal-card {
+    background-color: rgb(14, 14, 14);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.28);
+  }
+
+  .light .terminal-header {
+    background-color: rgb(28, 28, 28);
+  }
+
+  .light .terminal-body {
+    background-color: rgba(10, 10, 10, 0.92);
+    color: rgb(var(--ferrari-smoke));
+  }
+
+  .terminal-card .hud-border {
+    border-color: rgba(200, 168, 75, 0.15);
+    box-shadow: inset 0 0 24px rgba(200, 168, 75, 0.03);
+  }
+
+  .light .terminal-card .hud-border {
+    border-color: rgba(200, 168, 75, 0.15);
+    box-shadow: inset 0 0 24px rgba(200, 168, 75, 0.03);
+  }
+
+  .terminal-body .scanlines::after {
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08) 0px,
+      rgba(255, 255, 255, 0.08) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+
+  .light .terminal-body .scanlines::after {
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08) 0px,
+      rgba(255, 255, 255, 0.08) 1px,
+      transparent 1px,
+      transparent 3px
+    );
   }
 
   .carbon-grid {
-    background-color: #0a0a0a;
+    background-color: rgb(var(--ferrari-carbon));
     background-image:
-      linear-gradient(rgba(220, 0, 0, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(220, 0, 0, 0.04) 1px, transparent 1px),
+      linear-gradient(rgba(var(--ferrari-red), 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(var(--ferrari-red), 0.04) 1px, transparent 1px),
       linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
     background-size: 60px 60px, 60px 60px, 20px 20px, 20px 20px;

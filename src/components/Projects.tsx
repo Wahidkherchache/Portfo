@@ -8,6 +8,7 @@ interface Project {
   tech: string[];
   description: string;
   github?: string;
+  liveDemo?: string;
   status: 'shipped' | 'garage';
   pos: string;
 }
@@ -28,23 +29,35 @@ const PROJECTS: Project[] = [
     description:
       'A precision-built web calculator — keyboard support, chained operations, clean UI. Small car, careful engineering.',
     github: 'https://github.com/Wahidkherchache',
+    liveDemo: 'https://wahidkherchache.github.io/calculator-app/',
     status: 'shipped',
     pos: 'P2',
-  },{
+  },
+  {
     name: 'Dashboard F1',
-    tech: ['React','Vite', 'JavaScript'],
+    tech: ['React', 'Vite', 'JavaScript'],
     description:
       'A real-time dashboard for F1 data visualization — live race updates, driver statistics, and team performance metrics. Built with React and modern web technologies.',
     github: 'https://github.com/Wahidkherchache/f1-Dashboard',
+    liveDemo: 'https://wahidkherchache.github.io/F1-Dashboard/#/',
     status: 'shipped',
     pos: 'P3',
-  },{
+  },
+    {
+    name: 'To Do list app',
+    tech: ['Coming Soon'],
+    description:
+      'Currently on the jacks in the garage. A todo list application with LocalStorage, real-time data. Provisional build — expect green-flag racing soon.',
+    status: 'garage',
+    pos: 'P4',
+  },
+  {
     name: 'Full-Stack Project',
     tech: ['Coming Soon'],
     description:
       'Currently on the jacks in the garage. A full-stack application with auth, real-time data, and a clean API. Provisional build — expect green-flag racing soon.',
     status: 'garage',
-    pos: 'P4',
+    pos: 'P5',
   },
 ];
 
@@ -114,24 +127,39 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           ))}
         </div>
 
-        <div className="flex items-center justify-between pt-3 border-t border-ferrari-pit-border/60">
-          {project.github ? (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-mono text-xs text-ferrari-smoke/80 hover:text-ferrari-red transition-colors"
-            >
-              <Github size={15} />
-              <span>View Repo</span>
-              <ArrowUpRight size={13} className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-            </a>
-          ) : (
-            <span className="inline-flex items-center gap-2 font-mono text-xs text-ferrari-smoke/40">
-              <Lock size={13} />
-              <span>Classified</span>
-            </span>
-          )}
+        <div className="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-ferrari-pit-border/60">
+          <div className="flex flex-wrap items-center gap-3">
+            {project.github ? (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-mono text-xs text-ferrari-smoke/80 hover:text-ferrari-red transition-colors"
+              >
+                <Github size={15} />
+                <span>View Repo</span>
+                <ArrowUpRight size={13} className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </a>
+            ) : (
+              <span className="inline-flex items-center gap-2 font-mono text-xs text-ferrari-smoke/40">
+                <Lock size={13} />
+                <span>Classified</span>
+              </span>
+            )}
+
+            {project.liveDemo ? (
+              <a
+                href={project.liveDemo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-mono text-xs text-ferrari-smoke/80 hover:text-ferrari-gold transition-colors"
+              >
+                {/* <ArrowUpRight size={15} /> */}
+                <span>Live Demo</span>
+              </a>
+            ) : null}
+          </div>
+
           <span className="font-mono text-[0.65rem] text-ferrari-smoke/30 tracking-wider">
             #{String(index + 1).padStart(2, '0')}
           </span>

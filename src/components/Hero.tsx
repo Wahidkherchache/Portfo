@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight, ChevronDown, Download, Github, Linkedin } from 'lucide-react';
 import Speedometer from './Speedometer';
 import SpeedLines from './SpeedLines';
 import { reduceMotion } from '../utils/motion';
 
 const ROLES = ['Developer', 'Problem Solver', 'F1 Fanatic', 'Future Hacker'];
+const CV_URL = `${import.meta.env.BASE_URL}Abdelouahid_Kherchache_CV.pdf`;
 
 function useTypewriter(words: string[], speed = 110, pause = 1600) {
   const [text, setText] = useState('');
@@ -40,6 +41,27 @@ export default function Hero() {
   const [lightSwept, setLightSwept] = useState(false);
   const typed = useTypewriter(ROLES);
   const ref = useRef<HTMLElement>(null);
+
+  const handleCvDownload = async (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(CV_URL, { cache: 'no-store' });
+      if (!response.ok) throw new Error('CV file could not be loaded');
+
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = 'Abdelouahid-Kherchache-CV.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(blobUrl);
+    } catch {
+      window.open(CV_URL, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   useEffect(() => {
     const t = setTimeout(() => setLightSwept(true), reduceMotion() ? 200 : 600);
@@ -145,8 +167,30 @@ export default function Hero() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3.5 border border-ferrari-pit-border text-ferrari-smoke/80 font-mono text-xs md:text-sm tracking-[0.2em] uppercase rounded-full hover:border-ferrari-gold hover:text-ferrari-gold transition-colors"
             >
+              <Github size={16} />
               GitHub
             </a>
+
+            <a
+              href="https://www.linkedin.com/in/abdelouahid-kherchache"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3.5 border border-ferrari-pit-border text-ferrari-smoke/80 font-mono text-xs md:text-sm tracking-[0.2em] uppercase rounded-full hover:border-ferrari-gold hover:text-ferrari-gold transition-colors"
+            >
+              <Linkedin size={16} />
+              LinkedIn
+            </a>
+
+            <a
+              href={CV_URL}
+              onClick={handleCvDownload}
+              download="Abdelouahid-Kherchache-CV.pdf"
+              className="inline-flex items-center gap-2 px-6 py-3.5 border border-ferrari-pit-border text-ferrari-smoke/80 font-mono text-xs md:text-sm tracking-[0.2em] uppercase rounded-full hover:border-ferrari-gold hover:text-ferrari-gold transition-colors"
+            >
+              <Download size={16} />
+              Download CV
+            </a>
+
           </motion.div>
         </div>
 

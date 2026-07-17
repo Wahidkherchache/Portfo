@@ -1,28 +1,25 @@
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Home, User, Code2, Briefcase, Compass, Mail, Moon, Sun } from 'lucide-react';
 
 const NAV = [
-  { id: 'hero', label: 'Home' },
-  { id: 'about', label: 'About' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'roadmap', label: 'Roadmap' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'hero', label: 'Home', icon: Home },
+  { id: 'about', label: 'About', icon: User },
+  { id: 'skills', label: 'Skills', icon: Code2 },
+  { id: 'projects', label: 'Projects', icon: Briefcase },
+  { id: 'roadmap', label: 'Roadmap', icon: Compass },
+  { id: 'contact', label: 'Contact', icon: Mail },
 ];
-
-const WK = () => (
-  <svg viewBox="0 0 64 48" className="h-8 w-10" fill="none" aria-hidden>
-    <path d="M2 44 L2 4 L14 4 L24 28 L34 4 L46 4 L46 44 L36 44 L36 20 L26 44 L22 44 L12 20 L12 44 Z" fill="#C8A84B" />
-    <path d="M48 4 L56 4 L62 24 L56 44 L48 44 L54 24 Z" fill="#DC0000" />
-  </svg>
-);
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
   const [active, setActive] = useState('hero');
   const [indicator, setIndicator] = useState({ left: 0, width: 0 });
+  const [time, setTime] = useState(() => new Date().toLocaleTimeString('en-GB'));
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    if (typeof window === 'undefined') return 'dark';
+    return (window.localStorage.getItem('theme') as 'light' | 'dark') ?? 'dark';
+  });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -32,17 +29,42 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const sections = NAV.map((n) => document.getElementById(n.id)).filter(Boolean);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id);
-        });
-      },
-      { rootMargin: '-40% 0px -55% 0px' }
-    );
-    sections.forEach((s) => s && observer.observe(s));
-    return () => observer.disconnect();
+    const interval = window.setInterval(() => {
+      setTime(new Date().toLocaleTimeString('en-GB'));
+    }, 1000);
+    return () => window.clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('light', theme === 'light');
+    window.localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  useEffect(() => {
+    const updateActiveSection = () => {
+      const sections = NAV.map((n) => document.getElementById(n.id)).filter(
+        (el): el is HTMLElement => Boolean(el)
+      );
+      const nav = document.querySelector('nav');
+      const headerHeight = nav ? nav.getBoundingClientRect().height : 64;
+      const threshold = headerHeight + 32;
+
+      let current = sections[0]?.id ?? 'hero';
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= threshold) {
+          current = section.id;
+        }
+      }
+      setActive(current);
+    };
+
+    updateActiveSection();
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('resize', updateActiveSection);
+    return () => {
+      window.removeEventListener('scroll', updateActiveSection);
+      window.removeEventListener('resize', updateActiveSection);
+    };
   }, []);
 
   useEffect(() => {
@@ -50,9 +72,7 @@ export default function Navbar() {
     if (el) {
       setIndicator({ left: el.offsetLeft, width: el.offsetWidth });
     }
-  }, [active, open]);
-
-  const MENU_CLOSE_DELAY = 280;
+  }, [active]);
 
   const go = (id: string) => {
     const target = document.getElementById(id);
@@ -61,13 +81,12 @@ export default function Navbar() {
     const nav = document.querySelector('nav');
     const headerHeight = nav ? nav.getBoundingClientRect().height : 64;
 
-    setOpen(false);
     window.setTimeout(() => {
       window.scrollTo({
         top: target.offsetTop - headerHeight,
         behavior: 'smooth',
       });
-    }, MENU_CLOSE_DELAY);
+    }, 280);
   };
 
   return (
@@ -76,50 +95,38 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+        className={`hidden md:block fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-ferrari-carbon/92 backdrop-blur-md border-b border-ferrari-pit-border'
+            ? 'bg-ferrari-carbon/90 backdrop-blur-xl shadow-black/20'
             : 'bg-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-          <a
-            href="#hero"
-            onClick={(e) => {
-              e.preventDefault();
-              go('hero');
-            }}
-            className="flex items-center gap-2 group"
-            aria-label="Back to top"
-          >
-            <div className="relative">
-              <WK />
-              <div className="absolute inset-0 blur-md opacity-40 group-hover:opacity-70 transition-opacity">
-                <WK />
-              </div>
-            </div>
-            <span className="font-display tracking-[0.3em] text-sm text-ferrari-smoke hidden sm:block">
-              OUAHID
-            </span>
-          </a>
+          <div className="hidden md:flex items-center text-ferrari-smoke/70 font-mono text-xs uppercase tracking-[0.2em]">
+            Algiers, Algeria
+          </div>
 
-          <div className="hidden md:flex items-center relative">
-            {NAV.map((n) => (
-              <a
-                key={n.id}
-                data-nav={n.id}
-                href={`#${n.id}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  go(n.id);
-                }}
-                className={`px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] transition-colors ${
-                  active === n.id ? 'text-ferrari-gold' : 'text-ferrari-smoke/70 hover:text-ferrari-smoke'
-                }`}
-              >
-                {n.label}
-              </a>
-            ))}
+          <div className="hidden md:flex items-center relative gap-2">
+            {NAV.map((n) => {
+              const Icon = (n as any).icon as React.ComponentType<any> | undefined;
+              return (
+                <a
+                  key={n.id}
+                  data-nav={n.id}
+                  href={`#${n.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    go(n.id);
+                  }}
+                  className={`flex items-center gap-2 px-3 py-2 font-mono text-xs uppercase tracking-[0.2em] transition-colors ${
+                    active === n.id ? 'text-ferrari-gold' : 'text-ferrari-smoke/70 hover:text-ferrari-smoke'
+                  }`}
+                >
+                  {Icon ? <Icon size={14} className="opacity-80" /> : null}
+                  <span className="leading-none">{n.label}</span>
+                </a>
+              );
+            })}
             <motion.div
               className="absolute -bottom-0.5 h-0.5 bg-red-gradient"
               animate={{ left: indicator.left, width: indicator.width }}
@@ -127,46 +134,55 @@ export default function Navbar() {
             />
           </div>
 
+          <div className="hidden md:flex items-center gap-4">
+            <div className="hidden md:flex items-center text-ferrari-smoke/70 font-mono text-xs uppercase tracking-[0.2em]">
+              {time}
+            </div>
+            <button
+              type="button"
+              onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
+              aria-label="Toggle theme"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-ferrari-pit-border/50 bg-ferrari-carbon/90 text-ferrari-smoke transition-colors hover:bg-ferrari-pit hover:text-ferrari-gold"
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+          </div>
+        </div>
+      </motion.nav>
+
+      <div className="fixed inset-x-0 bottom-4 z-50 px-4 md:hidden">
+        <div className="mx-auto flex max-w-lg items-center justify-between gap-2 rounded-full border border-ferrari-pit-border/50 bg-ferrari-carbon/90 px-4 py-3 backdrop-blur-xl shadow-black/20">
+          {[
+            { id: 'hero', label: 'Home', icon: Home },
+            { id: 'about', label: 'About', icon: User },
+            { id: 'skills', label: 'Skills', icon: Code2 },
+            { id: 'projects', label: 'Projects', icon: Briefcase },
+            { id: 'roadmap', label: 'Roadmap', icon: Compass },
+            { id: 'contact', label: 'Contact', icon: Mail },
+          ].map(({ id, label, icon: Icon }) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => go(id)}
+              aria-label={label}
+              className={`inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors ${
+                active === id ? 'bg-ferrari-red text-white' : 'text-ferrari-smoke/70 hover:bg-white/5 hover:text-ferrari-smoke'
+              }`}
+            >
+              <Icon size={16} />
+            </button>
+          ))}
+          <div className="h-7 w-px rounded-full bg-ferrari-smoke/40 mx-2" />
           <button
-            className="md:hidden text-ferrari-smoke p-2"
-            onClick={() => setOpen((o) => !o)}
-            aria-label="Toggle menu"
-            aria-expanded={open}
+            type="button"
+            onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
+            aria-label="Toggle theme"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-ferrari-smoke/70 hover:bg-white/5 hover:text-ferrari-smoke transition-colors"
           >
-            {open ? <X size={22} /> : <Menu size={22} />}
+            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
           </button>
         </div>
-
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden bg-ferrari-carbon/98 backdrop-blur border-b border-ferrari-pit-border"
-            >
-              <div className="flex flex-col px-4 py-2">
-                {NAV.map((n) => (
-                  <a
-                    key={n.id}
-                    href={`#${n.id}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      go(n.id);
-                    }}
-                    className={`text-left py-3 font-mono text-sm uppercase tracking-[0.2em] border-b border-ferrari-pit-border/60 ${
-                      active === n.id ? 'text-ferrari-gold' : 'text-ferrari-smoke/80'
-                    }`}
-                  >
-                    {n.label}
-                  </a>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.nav>
+      </div>
     </>
   );
 }

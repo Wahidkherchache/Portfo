@@ -20,9 +20,16 @@ const TIMELINE: Milestone[] = [
     status: 'done',
     icon: Cpu,
     sub: 'L1 → L2',
+  },{
+    round : 'R02',
+    title : 'L2',
+    detail : 'Linux, C, Data Base, OOP, Assembly.',
+    status: 'done',
+    icon : Check,
+    sub : 'L2 → L3'
   },
   {
-    round: 'R02',
+    round: 'R03',
     title: 'React Mastery',
     detail: 'Hooks, state, component architecture. Took frontend to race pace.',
     status: 'done',
@@ -30,7 +37,7 @@ const TIMELINE: Milestone[] = [
     sub: 'Committed',
   },
   {
-    round: 'R03',
+    round: 'R04',
     title: 'Full-Stack Integration',
     detail: 'Node.js, APIs, databases — wiring the chassis to the powertrain.',
     status: 'active',
@@ -38,7 +45,7 @@ const TIMELINE: Milestone[] = [
     sub: 'On Track',
   },
   {
-    round: 'R04',
+    round: 'R05',
     title: 'Cybersecurity',
     detail: 'TryHackMe / HackTheBox — learning to defend by learning to break.',
     status: 'upcoming',
@@ -46,7 +53,7 @@ const TIMELINE: Milestone[] = [
     sub: 'Next Race',
   },
   {
-    round: 'R05',
+    round: 'R06',
     title: 'Ship & Compete',
     detail: 'Production-grade projects, open-source contributions, CTF placements.',
     status: 'upcoming',

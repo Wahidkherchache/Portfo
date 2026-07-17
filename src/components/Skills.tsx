@@ -56,21 +56,21 @@ function TelemetryBar({ name, level, delay }: Skill & { delay: number }) {
   return (
     <div className="group">
       <div className="flex items-center justify-between mb-1.5">
-        <span className="font-mono text-xs md:text-sm text-ferrari-smoke/90 tracking-wide">{name}</span>
+        <span className="font-mono text-xs md:text-sm text-ferrari-smoke/80 tracking-wide">{name}</span>
         <span className="font-mono text-[0.7rem] md:text-xs text-ferrari-gold tabular-nums">
           {level.toString().padStart(3, '0')}%
         </span>
       </div>
-      <div className="relative h-2 bg-ferrari-pit border border-ferrari-pit-border overflow-hidden">
-        <div className="absolute inset-0 track-line opacity-30" />
+      <div className="relative h-2 bg-[rgb(var(--surface-strong))] border border-ferrari-pit-border overflow-hidden">
+        <div className="absolute inset-0 track-line opacity-20" />
         <motion.div
-          className="absolute inset-y-0 left-0 bg-gradient-to-r from-ferrari-red-dark via-ferrari-red to-ferrari-gold"
+          className="absolute inset-y-0 left-0 bg-gradient-to-r from-ferrari-gold/90 via-ferrari-gold to-ferrari-gold-bright"
           initial={{ width: 0 }}
           whileInView={{ width: `${level}%` }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 1.1, delay, ease: [0.2, 0.8, 0.2, 1] }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-ferrari-gold/20 to-transparent opacity-50" />
         </motion.div>
         <div className="absolute inset-y-0 right-0 w-px bg-ferrari-pit-border" />
       </div>
@@ -103,13 +103,13 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: gi * 0.12, ease: [0.2, 0.8, 0.2, 1] }}
-              className="relative bg-ferrari-pit border border-ferrari-pit-border rounded-lg p-5 md:p-7 hover:border-ferrari-red/40 transition-colors group"
+              className="relative bg-[rgb(var(--surface))] border border-ferrari-pit-border rounded-lg p-5 md:p-7 hover:border-ferrari-gold/40 transition-colors group"
             >
-              <div className="absolute top-0 left-0 h-1 w-0 bg-red-gradient group-hover:w-full transition-all duration-500" />
+              <div className="absolute top-0 left-0 h-1 w-0 bg-gradient-to-r from-ferrari-gold/80 via-ferrari-gold/50 to-ferrari-gold/80 group-hover:w-full transition-all duration-500" />
 
               <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-[0.65rem] tracking-[0.3em] text-ferrari-red">
+                  <span className="font-mono text-[0.65rem] tracking-[0.3em] text-ferrari-gold/90">
                     {group.icon}
                   </span>
                   <h3 className="font-display text-2xl md:text-3xl tracking-wide text-ferrari-smoke">

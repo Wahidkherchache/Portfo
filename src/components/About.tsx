@@ -58,19 +58,19 @@ export default function About() {
           <motion.div {...swipeIn(true)} className="order-2 lg:order-1">
             <div className="relative">
               <div className="absolute -inset-0.5 bg-gradient-to-br from-ferrari-red/30 via-transparent to-ferrari-gold/20 blur-md" />
-              <div className="relative bg-ferrari-pit border border-ferrari-pit-border rounded-lg overflow-hidden hud-border">
-                <div className="flex items-center gap-2 px-4 py-2.5 bg-ferrari-carbon border-b border-ferrari-pit-border">
+              <div className="relative bg-ferrari-pit border border-ferrari-pit-border rounded-lg overflow-hidden hud-border terminal-card">
+                <div className="flex items-center gap-2 px-4 py-2.5 bg-ferrari-carbon border-b border-ferrari-pit-border terminal-header">
                   <div className="flex gap-1.5">
                     <span className="w-3 h-3 rounded-full bg-ferrari-red" />
                     <span className="w-3 h-3 rounded-full bg-ferrari-gold" />
                     <span className="w-3 h-3 rounded-full bg-emerald-500" />
                   </div>
-                  <div className="flex-1 flex items-center justify-center gap-2 text-ferrari-smoke/40 font-mono text-xs">
-                    <Terminal size={12} />
-                    <span>ouahid@scuderia:~</span>
+                  <div className="flex-1 flex items-center justify-center gap-2 text-ferrari-smoke/70 font-mono text-xs">
+                    <Terminal size={12} className="text-ferrari-gold/70" />
+                    <span className="text-ferrari-smoke/80 font-semibold">ouahid@USTHB:~</span>
                   </div>
                 </div>
-                <div className="p-4 md:p-6 min-h-[260px] md:min-h-[300px] font-mono text-sm relative scanlines">
+                <div className="p-4 md:p-6 min-h-[260px] md:min-h-[300px] font-mono text-sm relative scanlines terminal-body">
                   <div className="space-y-1.5">
                     {TERMINAL_LINES.slice(0, visibleLines).map((line, i) => (
                       <motion.div
