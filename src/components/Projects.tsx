@@ -45,10 +45,12 @@ const PROJECTS: Project[] = [
   },
     {
     name: 'To Do list app',
-    tech: ['Coming Soon'],
+    tech: ['React', 'Vite', 'Tailwind CSS'],
     description:
-      'Currently on the jacks in the garage. A todo list application with LocalStorage, real-time data. Provisional build — expect green-flag racing soon.',
-    status: 'garage',
+      'A to-do list app styled as an F1 starting grid, tasks line up in staggered "grid positions," and completing one means it has exited the grid.',
+    github: 'https://github.com/Wahidkherchache/The-Grid.git',
+    liveDemo: 'https://wahidkherchache.github.io/The-Grid/',
+    status: 'shipped',
     pos: 'P4',
   },
   {

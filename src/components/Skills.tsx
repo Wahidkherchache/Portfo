@@ -21,6 +21,7 @@ const GROUPS: Group[] = [
       { name: 'React', level: 80 },
       { name: 'JavaScript', level: 80 },
       { name: 'HTML / CSS', level: 90 },
+      { name: 'Tailwind CSS', level: 75}
     ],
   },
   {
@@ -37,7 +38,7 @@ const GROUPS: Group[] = [
     icon: '03',
     skills: [
       { name: 'C', level: 75 },
-      { name: 'Linux', level: 75 },
+      { name: 'Linux', level: 80 },
       { name: 'Bash', level: 75 },
     ],
   },
@@ -141,9 +142,12 @@ export default function Skills() {
           className="mt-8 flex flex-wrap items-center gap-3 font-mono text-[0.7rem] text-ferrari-smoke/40 tracking-wider"
         >
           <span className="text-ferrari-gold">SYS:</span>
+          <span>DSA</span><span className="text-ferrari-red">·</span>
           <span>Java</span><span className="text-ferrari-red">·</span>
           <span>React</span><span className="text-ferrari-red">·</span>
           <span>JavaScript</span><span className="text-ferrari-red">·</span>
+          <span>TypeScript</span><span className="text-ferrari-red">·</span>
+          <span>Tailwind CSS</span><span className="text-ferrari-red">·</span>
           <span>Node.js</span><span className="text-ferrari-red">·</span>
           <span>Oracle SQL</span><span className="text-ferrari-red">·</span>
           <span>C</span><span className="text-ferrari-red">·</span>
