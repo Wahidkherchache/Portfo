@@ -11,7 +11,11 @@ const NAV = [
   { id: 'contact', label: 'Contact', icon: Mail },
 ];
 
-export default function Navbar() {
+interface NavbarProps {
+  isIntroComplete?: boolean;
+}
+
+export default function Navbar({ isIntroComplete = true }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState('hero');
   const [indicator, setIndicator] = useState({ left: 0, width: 0 });
@@ -150,7 +154,11 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      <div className="fixed inset-x-0 bottom-4 z-50 px-4 md:hidden">
+      <div
+        className={`fixed inset-x-0 bottom-4 z-50 px-4 md:hidden transition-all duration-300 ${
+          isIntroComplete ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
+        }`}
+      >
         <div className="mx-auto flex max-w-lg items-center justify-between gap-2 rounded-full border border-ferrari-pit-border/50 bg-ferrari-carbon/90 px-4 py-3 backdrop-blur-xl shadow-black/20">
           {[
             { id: 'hero', label: 'Home', icon: Home },

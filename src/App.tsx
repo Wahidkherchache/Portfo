@@ -12,18 +12,22 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [showLoader, setShowLoader] = useState(true);
+  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    if (loading) {
+    if (showLoader) {
       document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+      return;
     }
+
+    document.body.style.overflow = '';
+    setShowContent(true);
+
     return () => {
       document.body.style.overflow = '';
     };
-  }, [loading]);
+  }, [showLoader]);
 
   return (
     <>
@@ -31,12 +35,12 @@ function App() {
       <CustomCursor />
 
       <AnimatePresence>
-        {loading && <Loader key="loader" onComplete={() => setLoading(false)} />}
+        {showLoader && <Loader key="loader" onComplete={() => setShowLoader(false)} />}
       </AnimatePresence>
 
-      {!loading && (
+      {showContent && (
         <>
-          <Navbar />
+          <Navbar isIntroComplete={showContent} />
           <main>
             <Hero />
             <About />

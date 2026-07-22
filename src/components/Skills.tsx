@@ -1,32 +1,52 @@
 import { motion } from 'framer-motion';
+import {
+  Radar,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ResponsiveContainer,
+  Tooltip,
+} from 'recharts';
 import SectionHeading from './SectionHeading';
 import { riseIn } from '../utils/motion';
 
-interface Skill {
-  name: string;
-  level: number;
+interface SkillData {
+  skill: string;
+  value: number;
+  category: string;
 }
 
-interface Group {
-  name: string;
-  icon: string;
-  skills: Skill[];
-}
+const SKILLS_DATA: SkillData[] = [
+  // Frontend
+  { skill: 'React', value: 80, category: 'Frontend' },
+  { skill: 'JavaScript', value: 80, category: 'Frontend' },
+  { skill: 'HTML/CSS', value: 90, category: 'Frontend' },
+  { skill: 'Tailwind', value: 75, category: 'Frontend' },
+  // Backend
+  { skill: 'Java', value: 80, category: 'Backend' },
+  { skill: 'Node.js', value: 78, category: 'Backend' },
+  { skill: 'Oracle SQL', value: 82, category: 'Backend' },
+  // Systems
+  { skill: 'C', value: 75, category: 'Systems' },
+  { skill: 'Linux', value: 70, category: 'Systems' },
+  // Tools
+  { skill: 'Git', value: 84, category: 'Tools' },
+  { skill: 'Supabase', value: 75, category: 'Tools' },
+];
 
-const GROUPS: Group[] = [
+const CATEGORIES = [
   {
     name: 'Frontend',
-    icon: '01',
     skills: [
       { name: 'React', level: 80 },
       { name: 'JavaScript', level: 80 },
-      { name: 'HTML / CSS', level: 90 },
-      { name: 'Tailwind CSS', level: 75}
+      { name: 'HTML/CSS', level: 90 },
+      { name: 'Tailwind', level: 75 },
     ],
   },
   {
     name: 'Backend',
-    icon: '02',
     skills: [
       { name: 'Java', level: 80 },
       { name: 'Node.js', level: 78 },
@@ -35,49 +55,57 @@ const GROUPS: Group[] = [
   },
   {
     name: 'Systems',
-    icon: '03',
     skills: [
       { name: 'C', level: 75 },
-      { name: 'Linux', level: 80 },
-      { name: 'Bash', level: 75 },
+      { name: 'Linux', level: 70 },
     ],
   },
   {
-    name: 'Tools & Focus',
-    icon: '04',
+    name: 'Tools',
     skills: [
       { name: 'Git', level: 84 },
-      { name: 'Security / CTF', level: 20 },
-      { name: 'Problem Solving', level: 92 },
+      { name: 'Supabase', level: 75 },
     ],
   },
 ];
 
-function TelemetryBar({ name, level, delay }: Skill & { delay: number }) {
+const CustomAngleTick = (props: any) => {
+  const { x, y, payload, textAnchor } = props;
   return (
-    <div className="group">
-      <div className="flex items-center justify-between mb-1.5">
-        <span className="font-mono text-xs md:text-sm text-ferrari-smoke/80 tracking-wide">{name}</span>
-        <span className="font-mono text-[0.7rem] md:text-xs text-ferrari-gold tabular-nums">
-          {level.toString().padStart(3, '0')}%
-        </span>
-      </div>
-      <div className="relative h-2 bg-[rgb(var(--surface-strong))] border border-ferrari-pit-border overflow-hidden">
-        <div className="absolute inset-0 track-line opacity-20" />
-        <motion.div
-          className="absolute inset-y-0 left-0 bg-gradient-to-r from-ferrari-gold/90 via-ferrari-gold to-ferrari-gold-bright"
-          initial={{ width: 0 }}
-          whileInView={{ width: `${level}%` }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 1.1, delay, ease: [0.2, 0.8, 0.2, 1] }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-ferrari-gold/20 to-transparent opacity-50" />
-        </motion.div>
-        <div className="absolute inset-y-0 right-0 w-px bg-ferrari-pit-border" />
-      </div>
-    </div>
+    <text
+      x={x}
+      y={y}
+      textAnchor={textAnchor}
+      fill="currentColor"
+      fontSize={12}
+      fontFamily="monospace"
+      className="font-mono text-xs text-ferrari-smoke font-semibold tracking-wider"
+    >
+      {payload.value}
+    </text>
   );
-}
+};
+
+const CustomTooltip = ({ active, payload }: any) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div className="bg-ferrari-pit border border-ferrari-gold/50 p-3 rounded-lg shadow-2xl font-mono text-xs text-ferrari-smoke">
+        <div className="flex items-center gap-2 mb-1.5 border-b border-ferrari-pit-border pb-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-ferrari-red animate-pulse" />
+          <span className="text-ferrari-gold font-bold tracking-widest text-[0.65rem] uppercase">
+            [{data.category}] TELEMETRY
+          </span>
+        </div>
+        <div className="flex items-center justify-between gap-4">
+          <span className="text-ferrari-smoke/90">{data.skill}:</span>
+          <span className="text-ferrari-gold font-bold tabular-nums">{data.value}%</span>
+        </div>
+      </div>
+    );
+  }
+  return null;
+};
 
 export default function Skills() {
   return (
@@ -96,62 +124,118 @@ export default function Skills() {
           subtitle="Every tool in the garage — calibrated and track-ready."
         />
 
-        <div className="mt-14 grid md:grid-cols-2 gap-5 md:gap-6">
-          {GROUPS.map((group, gi) => (
-            <motion.div
-              key={group.name}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: gi * 0.12, ease: [0.2, 0.8, 0.2, 1] }}
-              className="relative bg-[rgb(var(--surface))] border border-ferrari-pit-border rounded-lg p-5 md:p-7 hover:border-ferrari-gold/40 transition-colors group"
-            >
-              <div className="absolute top-0 left-0 h-1 w-0 bg-gradient-to-r from-ferrari-gold/80 via-ferrari-gold/50 to-ferrari-gold/80 group-hover:w-full transition-all duration-500" />
-
-              <div className="flex items-center justify-between mb-5">
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-[0.65rem] tracking-[0.3em] text-ferrari-gold/90">
-                    {group.icon}
-                  </span>
-                  <h3 className="font-display text-2xl md:text-3xl tracking-wide text-ferrari-smoke">
-                    {group.name}
-                  </h3>
-                </div>
-                <div className="flex gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-ferrari-red animate-pulse" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-ferrari-gold/40" />
-                </div>
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          {/* Radar Chart Container */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
+            className="lg:col-span-7 bg-ferrari-pit border border-ferrari-pit-border rounded-xl p-6 md:p-8 relative shadow-2xl overflow-hidden group hover:border-ferrari-gold/40 transition-colors"
+          >
+            {/* Top decorative Ferrari telemetry bar */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-ferrari-red via-ferrari-gold to-ferrari-red" />
+            <div className="flex items-center justify-between mb-4 border-b border-ferrari-pit-border pb-3">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-ferrari-red animate-pulse" />
+                <span className="font-mono text-xs tracking-[0.25em] text-ferrari-gold uppercase">
+                  RADAR_TELEMETRY
+                </span>
               </div>
+              <span className="font-mono text-[0.65rem] text-ferrari-smoke/50 tracking-widest">
+                SCALE: 0-100%
+              </span>
+            </div>
 
-              <div className="space-y-4">
-                {group.skills.map((s, si) => (
-                  <TelemetryBar
-                    key={s.name}
-                    name={s.name}
-                    level={s.level}
-                    delay={gi * 0.12 + si * 0.1}
+            {/* Recharts RadarChart */}
+            <div className="w-full h-[380px] md:h-[450px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart cx="50%" cy="50%" outerRadius="75%" data={SKILLS_DATA}>
+                  <PolarGrid stroke="rgb(var(--ferrari-red-dark) / 0.4)" gridType="polygon" />
+                  <PolarAngleAxis
+                    dataKey="skill"
+                    tick={CustomAngleTick}
                   />
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                  <PolarRadiusAxis
+                    angle={90}
+                    domain={[0, 100]}
+                    stroke="rgb(var(--ferrari-pit-border))"
+                    tick={{ fill: 'rgb(var(--ferrari-gold))', fontSize: 10, fontFamily: 'monospace' }}
+                  />
+                  <Tooltip content={<CustomTooltip />} />
+                  <Radar
+                    name="Performance"
+                    dataKey="value"
+                    stroke="rgb(var(--ferrari-gold))"
+                    fill="rgb(var(--ferrari-gold) / 0.18)"
+                    fillOpacity={1}
+                    dot={{ r: 4, fill: 'rgb(var(--ferrari-gold))', stroke: 'rgb(var(--background))', strokeWidth: 2 }}
+                  />
+                </RadarChart>
+              </ResponsiveContainer>
+            </div>
+          </motion.div>
+
+          {/* Telemetry Breakdown Cards */}
+          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+            {CATEGORIES.map((cat, idx) => (
+              <motion.div
+                key={cat.name}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="bg-ferrari-pit border border-ferrari-pit-border rounded-lg p-4 relative group hover:border-ferrari-gold/40 transition-colors"
+              >
+                <div className="flex items-center justify-between mb-3 border-b border-ferrari-pit-border pb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-[0.65rem] text-ferrari-gold">0{idx + 1}</span>
+                    <h3 className="font-display text-xl text-ferrari-smoke tracking-wide">
+                      {cat.name}
+                    </h3>
+                  </div>
+                  <span className="w-1.5 h-1.5 rounded-full bg-ferrari-gold/60" />
+                </div>
+                <div className="space-y-2">
+                  {cat.skills.map((s) => (
+                    <div key={s.name} className="flex items-center justify-between text-xs font-mono">
+                      <span className="text-ferrari-smoke/90">{s.name}</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-20 md:w-24 h-1.5 bg-[rgb(var(--surface-strong))] border border-ferrari-pit-border rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-ferrari-gold"
+                            style={{ width: `${s.level}%` }}
+                          />
+                        </div>
+                        <span className="text-ferrari-gold text-[0.7rem] w-8 text-right font-bold">
+                          {s.level}%
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
+        {/* Footer SYS summary list */}
         <motion.div
           {...riseIn(0.3)}
-          className="mt-8 flex flex-wrap items-center gap-3 font-mono text-[0.7rem] text-ferrari-smoke/40 tracking-wider"
+          className="mt-10 flex flex-wrap items-center gap-3 font-mono text-[0.7rem] text-ferrari-smoke/50 tracking-wider"
         >
           <span className="text-ferrari-gold">SYS:</span>
-          <span>DSA</span><span className="text-ferrari-red">·</span>
-          <span>Java</span><span className="text-ferrari-red">·</span>
           <span>React</span><span className="text-ferrari-red">·</span>
           <span>JavaScript</span><span className="text-ferrari-red">·</span>
-          <span>TypeScript</span><span className="text-ferrari-red">·</span>
-          <span>Tailwind CSS</span><span className="text-ferrari-red">·</span>
+          <span>HTML/CSS</span><span className="text-ferrari-red">·</span>
+          <span>Tailwind</span><span className="text-ferrari-red">·</span>
+          <span>Java</span><span className="text-ferrari-red">·</span>
           <span>Node.js</span><span className="text-ferrari-red">·</span>
           <span>Oracle SQL</span><span className="text-ferrari-red">·</span>
           <span>C</span><span className="text-ferrari-red">·</span>
-          <span>Linux</span>
+          <span>Linux</span><span className="text-ferrari-red">·</span>
+          <span>Git</span><span className="text-ferrari-red">·</span>
+          <span>Supabase</span>
         </motion.div>
       </div>
     </section>
