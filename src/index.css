@@ -39,7 +39,11 @@
 }
 html {
   scroll-behavior: smooth;
-  /* -webkit-text-size-adjust: 100%; */
+  scroll-padding-top: 80px;
+}
+
+section {
+  scroll-margin-top: 80px;
 }
 
 body {

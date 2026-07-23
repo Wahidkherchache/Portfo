@@ -82,15 +82,16 @@ export default function Navbar({ isIntroComplete = true }: NavbarProps) {
     const target = document.getElementById(id);
     if (!target) return;
 
+    const isMobile = window.innerWidth < 768;
     const nav = document.querySelector('nav');
-    const headerHeight = nav ? nav.getBoundingClientRect().height : 64;
+    const headerHeight = isMobile ? 0 : (nav ? nav.getBoundingClientRect().height : 64);
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+    const topPadding = isMobile ? 24 : 16;
 
-    window.setTimeout(() => {
-      window.scrollTo({
-        top: target.offsetTop - headerHeight,
-        behavior: 'smooth',
-      });
-    }, 280);
+    window.scrollTo({
+      top: Math.max(0, targetPosition - headerHeight - topPadding),
+      behavior: 'smooth',
+    });
   };
 
   return (
