@@ -31,7 +31,7 @@ export default function Contact() {
 
       <div className="relative max-w-6xl mx-auto px-4 md:px-8">
         <SectionHeading
-          index="05"
+          index="06"
           title="OPEN COMMS"
           subtitle="Team radio is open — transmissions welcome."
         />

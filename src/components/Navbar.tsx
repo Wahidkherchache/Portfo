@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Home, User, Code2, Briefcase, Compass, Mail, Moon, Sun } from 'lucide-react';
+import { Home, User, Code2, Briefcase, Shield, Compass, Mail, Moon, Sun } from 'lucide-react';
 
 const NAV = [
   { id: 'hero', label: 'Home', icon: Home },
   { id: 'about', label: 'About', icon: User },
   { id: 'skills', label: 'Skills', icon: Code2 },
   { id: 'projects', label: 'Projects', icon: Briefcase },
+  { id: 'certifications', label: 'Certs', icon: Shield },
   { id: 'roadmap', label: 'Roadmap', icon: Compass },
   { id: 'contact', label: 'Contact', icon: Mail },
 ];
@@ -156,39 +157,32 @@ export default function Navbar({ isIntroComplete = true }: NavbarProps) {
       </motion.nav>
 
       <div
-        className={`fixed inset-x-0 bottom-4 z-50 px-4 md:hidden transition-all duration-300 ${
+        className={`fixed inset-x-0 bottom-3 z-50 px-3 md:hidden transition-all duration-300 ${
           isIntroComplete ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         }`}
       >
-        <div className="mx-auto flex max-w-lg items-center justify-between gap-2 rounded-full border border-ferrari-pit-border/50 bg-ferrari-carbon/90 px-4 py-3 backdrop-blur-xl shadow-black/20">
-          {[
-            { id: 'hero', label: 'Home', icon: Home },
-            { id: 'about', label: 'About', icon: User },
-            { id: 'skills', label: 'Skills', icon: Code2 },
-            { id: 'projects', label: 'Projects', icon: Briefcase },
-            { id: 'roadmap', label: 'Roadmap', icon: Compass },
-            { id: 'contact', label: 'Contact', icon: Mail },
-          ].map(({ id, label, icon: Icon }) => (
+        <div className="mx-auto flex max-w-fit items-center justify-center gap-0.5 rounded-full border border-ferrari-pit-border/50 bg-ferrari-carbon/90 px-2.5 py-1.5 backdrop-blur-xl shadow-black/20">
+          {NAV.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               type="button"
               onClick={() => go(id)}
               aria-label={label}
-              className={`inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors ${
+              className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors ${
                 active === id ? 'bg-ferrari-red text-white' : 'text-ferrari-smoke/70 hover:bg-white/5 hover:text-ferrari-smoke'
               }`}
             >
-              <Icon size={16} />
+              <Icon size={15} />
             </button>
           ))}
-          <div className="h-7 w-px rounded-full bg-ferrari-smoke/40 mx-2" />
+          <div className="h-4 w-px bg-ferrari-smoke/20 mx-1 shrink-0" />
           <button
             type="button"
             onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
             aria-label="Toggle theme"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-ferrari-smoke/70 hover:bg-white/5 hover:text-ferrari-smoke transition-colors"
+            className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-ferrari-smoke/70 hover:bg-white/5 hover:text-ferrari-smoke transition-colors"
           >
-            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
           </button>
         </div>
       </div>

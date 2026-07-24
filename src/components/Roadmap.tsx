@@ -137,7 +137,7 @@ export default function Roadmap() {
       />
       <div className="relative max-w-4xl mx-auto px-4 md:px-8">
         <SectionHeading
-          index="04"
+          index="05"
           title="THE RACE CALENDAR"
           subtitle="The season — lap by lap, circuit by circuit."
         />
