@@ -32,6 +32,23 @@ const CERTIFICATIONS: Certification[] = [
       'DATA CONFIDENTIALITY',
     ],
   },
+  {
+    id: 'cisco-networking-basics',
+    title: 'NETWORKING BASICS',
+    issuer: 'CISCO NETWORKING ACADEMY',
+    date: 'July 31, 2026',
+    certId: '6e4cd09d-d7f2-46da-842b-dd4047e2c910',
+    verifyUrl: 'https://www.credly.com/badges/9ff63a5f-6bba-4c14-a789-57a61c9e7f19/public_url',
+    imageUrl: '/Portfo/certificates/Networking-Basic.png',
+    status: 'VERIFIED',
+    skills: [
+      'NETWORKING FUNDAMENTALS',
+      'IP ADDRESSING & SUBNETTING',
+      'ROUTING & SWITCHING',
+      'NETWORK PROTOCOLS',
+      'LAN/WAN INFRASTRUCTURE',
+    ],
+  }
 ];
 
 function CertCard({ cert, index }: { cert: Certification; index: number }) {
@@ -49,7 +66,7 @@ function CertCard({ cert, index }: { cert: Certification; index: number }) {
       <div className="w-full md:w-[45%] relative overflow-hidden bg-ferrari-carbon border-b md:border-b-0 md:border-r border-ferrari-pit-border flex items-center justify-center min-h-[260px] md:min-h-[360px]">
         <img
           src={cert.imageUrl}
-          alt="Cisco Cybersecurity Certificate"
+          alt={`${cert.title} Certificate`}
           className="w-full h-full object-cover object-center block"
         />
       </div>
@@ -129,7 +146,7 @@ export default function Certifications() {
           subtitle="Official technical accreditations & security qualifications."
         />
 
-        <div className="mt-14 w-full">
+        <div className="mt-14 w-full space-y-8">
           {CERTIFICATIONS.map((cert, i) => (
             <CertCard key={cert.id} cert={cert} index={i} />
           ))}

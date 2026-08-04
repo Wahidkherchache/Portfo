@@ -13,7 +13,7 @@ interface SkillCarConfig {
   iconClass: string;
 }
 
-// 11 Skills mapped to 11 Real 2024 F1 Team Colors & Devicons
+// 12 Skills mapped to Real F1 Team Colors & Devicons
 const SKILL_CARS: SkillCarConfig[] = [
   { id: 'react', name: 'React', lapTime: 35.0, color: '#E8002D', category: 'Frontend', iconClass: 'devicon-react-original colored' },        // Ferrari (red)
   { id: 'js', name: 'JavaScript', lapTime: 35.5, color: '#FF8000', category: 'Frontend', iconClass: 'devicon-javascript-plain colored' },     // McLaren (papaya orange)
@@ -26,6 +26,7 @@ const SKILL_CARS: SkillCarConfig[] = [
   { id: 'oracle-sql', name: 'Oracle SQL', lapTime: 39.0, color: '#52E252', category: 'Backend', iconClass: 'devicon-oracle-original colored' },// Kick Sauber (green)
   { id: 'c', name: 'C', lapTime: 39.5, color: '#6692FF', category: 'Systems', iconClass: 'devicon-c-plain colored' },                 // RB (blue-purple)
   { id: 'linux', name: 'Linux', lapTime: 40.0, color: '#C92D4B', category: 'Systems', iconClass: 'devicon-linux-plain colored' },         // Stake (dark red)
+  { id: 'python', name: 'Python', lapTime: 41.5, color: '#3776AB', category: 'Backend', iconClass: 'devicon-python-plain colored' },       // Python (blue)
 ];
 
 /**
@@ -537,7 +538,7 @@ export default function Skills() {
                   if (!car.x && !car.y) return null; // Prevent initial rendering at (0,0)
                   const isHovered = hoveredSkillId === car.id;
                   const leaderboardEntry = leaderboard.find((l) => l.id === car.id);
-                  const rank = leaderboardEntry ? leaderboardEntry.rank : 11;
+                  const rank = leaderboardEntry ? leaderboardEntry.rank : leaderboard.length;
 
                   return (
                     <g

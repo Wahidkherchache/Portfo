@@ -52,6 +52,15 @@ const PROJECTS: Project[] = [
     liveDemo: 'https://wahidkherchache.github.io/The-Grid/',
     status: 'shipped',
     pos: 'P4',
+  },{
+    name: 'CipherGuard',
+    tech: ['React', 'Vite', 'Tailwind CSS'],
+    description:
+      'A local-first, terminal-styled password security tool — check how strong your password really is, or generate a cryptographically secure one. Nothing ever leaves your browser.',
+    github: 'https://github.com/Wahidkherchache/CipherGuard.git',
+    liveDemo : 'https://wahidkherchache.github.io/CipherGuard/#/check',
+    status: 'shipped',
+    pos: 'P5',
   },
   {
     name: 'Full-Stack Project',
@@ -59,7 +68,7 @@ const PROJECTS: Project[] = [
     description:
       'Currently on the jacks in the garage. A full-stack application with auth, real-time data, and a clean API. Provisional build — expect green-flag racing soon.',
     status: 'garage',
-    pos: 'P5',
+    pos: 'P6',
   },
 ];
 
