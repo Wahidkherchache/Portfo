@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import { motion } from 'framer-motion';
-import { Home, User, Code2, Briefcase, Shield, Compass, Mail, Moon, Sun } from 'lucide-react';
+import { Home, User, Code2, Briefcase, Shield, Compass, Mail, Moon, Sun, Zap } from 'lucide-react';
 
 const NAV = [
   { id: 'hero', label: 'Home', icon: Home },
@@ -14,9 +14,10 @@ const NAV = [
 
 interface NavbarProps {
   isIntroComplete?: boolean;
+  onOpenF1Game?: () => void;
 }
 
-export default function Navbar({ isIntroComplete = true }: NavbarProps) {
+export default function Navbar({ isIntroComplete = true, onOpenF1Game }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState('hero');
   const [indicator, setIndicator] = useState({ left: 0, width: 0 });
@@ -146,6 +147,15 @@ export default function Navbar({ isIntroComplete = true }: NavbarProps) {
             </div>
             <button
               type="button"
+              onClick={onOpenF1Game}
+              aria-label="F1 Reaction Time Test"
+              title="F1 Reaction Time Test"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#E8002D]/40 bg-ferrari-carbon/90 text-[#E8002D] transition-all hover:bg-[#E8002D]/20 hover:scale-105"
+            >
+              <Zap size={18} />
+            </button>
+            <button
+              type="button"
               onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
               aria-label="Toggle theme"
               className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-ferrari-pit-border/50 bg-ferrari-carbon/90 text-ferrari-smoke transition-colors hover:bg-ferrari-pit hover:text-ferrari-gold"
@@ -163,17 +173,29 @@ export default function Navbar({ isIntroComplete = true }: NavbarProps) {
       >
         <div className="mx-auto flex max-w-fit items-center justify-center gap-0.5 rounded-full border border-ferrari-pit-border/50 bg-ferrari-carbon/90 px-2.5 py-1.5 backdrop-blur-xl shadow-black/20">
           {NAV.map(({ id, label, icon: Icon }) => (
-            <button
-              key={id}
-              type="button"
-              onClick={() => go(id)}
-              aria-label={label}
-              className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors ${
-                active === id ? 'bg-ferrari-red text-white' : 'text-ferrari-smoke/70 hover:bg-white/5 hover:text-ferrari-smoke'
-              }`}
-            >
-              <Icon size={15} />
-            </button>
+            <Fragment key={id}>
+              <button
+                type="button"
+                onClick={() => go(id)}
+                aria-label={label}
+                className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors ${
+                  active === id ? 'bg-ferrari-red text-white' : 'text-ferrari-smoke/70 hover:bg-white/5 hover:text-ferrari-smoke'
+                }`}
+              >
+                <Icon size={15} />
+              </button>
+              {id === 'projects' && (
+                <button
+                  type="button"
+                  onClick={onOpenF1Game}
+                  aria-label="F1 Reaction Time Test"
+                  title="F1 Reaction Time Test"
+                  className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[#E8002D] hover:bg-[#E8002D]/15 transition-colors"
+                >
+                  <Zap size={15} />
+                </button>
+              )}
+            </Fragment>
           ))}
           <div className="h-4 w-px bg-ferrari-smoke/20 mx-1 shrink-0" />
           <button

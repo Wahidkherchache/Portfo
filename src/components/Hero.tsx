@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState, type MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ChevronDown, Download, Github, Linkedin } from 'lucide-react';
+import { ArrowRight, ChevronDown, Download, Github, Linkedin, Zap } from 'lucide-react';
 import Speedometer from './Speedometer';
 import SpeedLines from './SpeedLines';
 import { reduceMotion } from '../utils/motion';
 
 const ROLES = ['Developer', 'Problem Solver', 'F1 Fanatic', 'Future Hacker'];
 const CV_URL = `${import.meta.env.BASE_URL}Abdelouahid_Kherchache_CV.pdf`;
+
+interface HeroProps {
+  onOpenF1Game?: () => void;
+}
 
 function useTypewriter(words: string[], speed = 110, pause = 1600) {
   const [text, setText] = useState('');
@@ -37,7 +41,7 @@ function useTypewriter(words: string[], speed = 110, pause = 1600) {
   return text;
 }
 
-export default function Hero() {
+export default function Hero({ onOpenF1Game }: HeroProps = {}) {
   const [lightSwept, setLightSwept] = useState(false);
   const typed = useTypewriter(ROLES);
   const ref = useRef<HTMLElement>(null);
@@ -191,6 +195,22 @@ export default function Hero() {
               Download CV
             </a>
 
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: lightSwept ? 1 : 0, y: lightSwept ? 0 : 16 }}
+            transition={{ duration: 0.5, delay: 0.75 }}
+            className="mt-5"
+          >
+            <button
+              type="button"
+              onClick={onOpenF1Game}
+              className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#E8002D] text-white font-mono text-xs md:text-sm tracking-wider uppercase rounded-full hover:bg-[#E8002D]/10 hover:shadow-[0_0_15px_rgba(232,0,45,0.4)] transition-all duration-300 group cursor-pointer"
+            >
+              <Zap size={16} className="text-[#E8002D] group-hover:scale-110 transition-transform" />
+              <span>TEST YOUR REACTION TIME</span>
+            </button>
           </motion.div>
         </div>
 

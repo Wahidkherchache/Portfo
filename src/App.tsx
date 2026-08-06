@@ -11,10 +11,12 @@ import Certifications from './components/Certifications';
 import Roadmap from './components/Roadmap';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import F1ReactionModal from './components/F1ReactionModal';
 
 function App() {
   const [showLoader, setShowLoader] = useState(true);
   const [showContent, setShowContent] = useState(false);
+  const [isF1ModalOpen, setIsF1ModalOpen] = useState(false);
 
   useEffect(() => {
     if (showLoader) {
@@ -41,9 +43,9 @@ function App() {
 
       {showContent && (
         <>
-          <Navbar isIntroComplete={showContent} />
+          <Navbar isIntroComplete={showContent} onOpenF1Game={() => setIsF1ModalOpen(true)} />
           <main>
-            <Hero />
+            <Hero onOpenF1Game={() => setIsF1ModalOpen(true)} />
             <About />
             <Skills />
             <Projects />
@@ -52,6 +54,11 @@ function App() {
             <Contact />
           </main>
           <Footer />
+
+          <F1ReactionModal
+            isOpen={isF1ModalOpen}
+            onClose={() => setIsF1ModalOpen(false)}
+          />
         </>
       )}
     </>
