@@ -54,13 +54,18 @@ const CERTIFICATIONS: Certification[] = [
 function CertCard({ cert, index }: { cert: Certification; index: number }) {
   return (
     <motion.article
+      layout={false}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, margin: '0px' }}
       transition={{ duration: 0.6, delay: index * 0.15, ease: [0.2, 0.8, 0.2, 1] }}
       whileHover={{
         y: -6,
         transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
+      }}
+      style={{
+        willChange: 'opacity, transform',
+        contain: 'layout style paint',
       }}
       className="group relative w-full spatial-glass rounded-2xl overflow-hidden transition-[border-color,box-shadow,opacity] duration-300 ease-out border border-white/10 hover:border-ferrari-red/50 hover:shadow-[0_16px_36px_rgba(0,0,0,0.5),0_0_25px_rgba(220,0,0,0.2)] flex flex-col md:flex-row"
       data-cursor="hover"
