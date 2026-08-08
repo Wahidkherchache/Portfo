@@ -97,12 +97,12 @@ function Node({ m, index }: { m: Milestone; index: number }) {
       </div>
 
       <div
-        className={`bg-ferrari-pit border rounded-lg p-4 md:p-5 transition-colors ${
+        className={`spatial-glass rounded-2xl p-5 md:p-6 transition-all duration-300 ${
           upcoming
-            ? 'border-ferrari-pit-border opacity-60'
+            ? 'border-white/10 opacity-60'
             : active
-            ? 'border-ferrari-gold/40'
-            : 'border-ferrari-pit-border hover:border-ferrari-red/40'
+            ? 'border-ferrari-gold/50 shadow-[0_0_24px_rgba(201,168,76,0.15)]'
+            : 'border-white/10 hover:border-ferrari-red/40'
         }`}
       >
         <div className="flex items-center justify-between mb-1.5">

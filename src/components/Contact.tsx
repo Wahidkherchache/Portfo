@@ -57,12 +57,12 @@ export default function Contact() {
             href="https://github.com/Wahidkherchache"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative bg-ferrari-pit border border-ferrari-pit-border rounded-lg p-6 overflow-hidden hover:border-ferrari-red/50 transition-colors animate-pulse-red"
+            className="group relative spatial-glass rounded-2xl p-6 overflow-hidden hover:border-ferrari-red/50 transition-colors animate-pulse-red"
             data-cursor="hover"
           >
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-red-glow opacity-20 group-hover:opacity-40 transition-opacity" />
             <div className="relative flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-ferrari-carbon border border-ferrari-red/40 flex items-center justify-center group-hover:border-ferrari-red transition-colors shrink-0">
+              <div className="w-12 h-12 rounded-full bg-white/5 border border-ferrari-red/40 flex items-center justify-center group-hover:border-ferrari-red transition-colors shrink-0 backdrop-blur-md">
                 <Github size={22} className="text-ferrari-smoke group-hover:text-white transition-colors" />
               </div>
               <div className="min-w-0">
@@ -87,7 +87,7 @@ export default function Contact() {
           <motion.a
             {...swipeIn(false)}
             href={`mailto:${EMAIL}`}
-            className="group relative bg-ferrari-pit border border-ferrari-pit-border rounded-lg p-6 overflow-hidden hover:border-ferrari-gold/50 transition-colors"
+            className="group relative spatial-glass rounded-2xl p-6 overflow-hidden hover:border-ferrari-gold/50 transition-colors"
             data-cursor="hover"
           >
             <div
@@ -97,7 +97,7 @@ export default function Contact() {
               }}
             />
             <div className="relative flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-ferrari-carbon border border-ferrari-gold/40 flex items-center justify-center group-hover:border-ferrari-gold transition-colors shrink-0">
+              <div className="w-12 h-12 rounded-full bg-white/5 border border-ferrari-gold/40 flex items-center justify-center group-hover:border-ferrari-gold transition-colors shrink-0 backdrop-blur-md">
                 <Mail size={20} className="text-ferrari-gold" />
               </div>
               <div className="min-w-0">
@@ -124,7 +124,7 @@ export default function Contact() {
             href="https://linkedin.com/in/abdelouahid-kherchache"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative bg-ferrari-pit border border-ferrari-pit-border rounded-lg p-6 overflow-hidden hover:border-ferrari-gold/50 transition-colors"
+            className="group relative spatial-glass rounded-2xl p-6 overflow-hidden hover:border-ferrari-gold/50 transition-colors"
             data-cursor="hover"
           >
             <div
@@ -134,7 +134,7 @@ export default function Contact() {
               }}
             />
             <div className="relative flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-ferrari-carbon border border-ferrari-gold/40 flex items-center justify-center group-hover:border-ferrari-gold transition-colors shrink-0">
+              <div className="w-12 h-12 rounded-full bg-white/5 border border-ferrari-gold/40 flex items-center justify-center group-hover:border-ferrari-gold transition-colors shrink-0 backdrop-blur-md">
                 <Linkedin size={20} className="text-ferrari-gold" />
               </div>
               <div className="min-w-0">
@@ -159,11 +159,11 @@ export default function Contact() {
         {/* Channel 04 - DIRECT COMMS (Contact Form) */}
         <motion.div
           {...riseIn(0.2)}
-          className="mt-8 bg-ferrari-pit border border-ferrari-pit-border rounded-xl p-6 md:p-8 relative overflow-hidden shadow-2xl group hover:border-ferrari-red/40 transition-colors"
+          className="mt-8 spatial-glass rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-2xl group hover:border-ferrari-red/40 transition-colors"
         >
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-ferrari-red via-ferrari-gold to-ferrari-red" />
 
-          <div className="flex items-center justify-between mb-6 border-b border-ferrari-pit-border pb-4">
+          <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-4">
             <div className="flex items-center gap-3">
               <span className="font-mono text-xs tracking-[0.25em] text-ferrari-gold uppercase">
                 Channel 04
@@ -191,7 +191,7 @@ export default function Contact() {
               <button
                 type="button"
                 onClick={() => setSubmitted(false)}
-                className="mt-4 px-6 py-2.5 bg-ferrari-carbon border border-ferrari-pit-border text-ferrari-gold font-mono text-xs uppercase tracking-wider rounded-md hover:border-ferrari-gold transition-colors"
+                className="mt-4 px-6 py-2.5 bg-white/5 border border-white/10 text-ferrari-gold font-mono text-xs uppercase tracking-wider rounded-full hover:border-ferrari-gold transition-colors backdrop-blur-md"
               >
                 Send Another Transmission
               </button>
@@ -209,7 +209,7 @@ export default function Contact() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Your Name"
-                    className="w-full bg-[rgb(var(--surface-strong))] border border-ferrari-pit-border rounded-lg p-3 text-sm text-ferrari-smoke placeholder:text-ferrari-smoke/30 font-mono focus:outline-none focus:border-ferrari-gold transition-colors"
+                    className="w-full bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-3 text-sm text-ferrari-smoke placeholder:text-ferrari-smoke/30 font-mono focus:outline-none focus:border-ferrari-gold transition-colors"
                   />
                 </div>
                 <div>
@@ -222,7 +222,7 @@ export default function Contact() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="your.email@domain.com"
-                    className="w-full bg-[rgb(var(--surface-strong))] border border-ferrari-pit-border rounded-lg p-3 text-sm text-ferrari-smoke placeholder:text-ferrari-smoke/30 font-mono focus:outline-none focus:border-ferrari-gold transition-colors"
+                    className="w-full bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-3 text-sm text-ferrari-smoke placeholder:text-ferrari-smoke/30 font-mono focus:outline-none focus:border-ferrari-gold transition-colors"
                   />
                 </div>
               </div>
@@ -236,12 +236,12 @@ export default function Contact() {
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="State your transmission..."
-                  className="w-full bg-[rgb(var(--surface-strong))] border border-ferrari-pit-border rounded-lg p-3 text-sm text-ferrari-smoke placeholder:text-ferrari-smoke/30 font-mono focus:outline-none focus:border-ferrari-gold transition-colors resize-none"
+                  className="w-full bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-3 text-sm text-ferrari-smoke placeholder:text-ferrari-smoke/30 font-mono focus:outline-none focus:border-ferrari-gold transition-colors resize-none"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full group relative inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-ferrari-red text-white font-mono text-xs md:text-sm tracking-[0.2em] uppercase font-semibold rounded-lg overflow-hidden transition-all hover:bg-ferrari-red-bright hover:shadow-red-glow"
+                className="w-full group relative inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-ferrari-red text-white font-mono text-xs md:text-sm tracking-[0.2em] uppercase font-semibold rounded-full overflow-hidden transition-all hover:bg-ferrari-red-bright hover:shadow-red-glow"
                 data-cursor="hover"
               >
                 <span className="absolute inset-0 bg-racing-stripe opacity-0 group-hover:opacity-30 transition-opacity" />

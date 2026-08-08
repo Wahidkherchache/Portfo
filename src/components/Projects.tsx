@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Github, Wrench, ArrowUpRight, Lock } from 'lucide-react';
+import { Github, Wrench, ArrowUpRight, Lock, ExternalLink } from 'lucide-react';
 import SectionHeading from './SectionHeading';
 import { riseIn } from '../utils/motion';
 
@@ -94,11 +94,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6, delay: index * 0.15, ease: [0.2, 0.8, 0.2, 1] }}
-      whileHover={{ y: -8 }}
-      className={`group relative bg-ferrari-pit border rounded-lg overflow-hidden transition-shadow duration-300 ${
+      whileHover={{
+        y: -6,
+        transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
+      }}
+      className={`group relative spatial-glass rounded-2xl overflow-hidden transition-[border-color,box-shadow,opacity] duration-300 ease-out ${
         garage
-          ? 'border-ferrari-pit-border opacity-75 hover:opacity-100'
-          : 'border-ferrari-pit-border hover:border-ferrari-red/50 hover:shadow-card-hover'
+          ? 'border border-white/10 opacity-75 hover:opacity-100'
+          : 'border border-white/10 hover:border-ferrari-red/50 hover:shadow-[0_16px_36px_rgba(0,0,0,0.5),0_0_25px_rgba(220,0,0,0.2)]'
       }`}
       data-cursor="hover"
     >
@@ -165,8 +168,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 font-mono text-xs text-ferrari-smoke/80 hover:text-ferrari-gold transition-colors"
               >
-                {/* <ArrowUpRight size={15} /> */}
+                <ExternalLink size={15} />
                 <span>Live Demo</span>
+                <ArrowUpRight size={13} className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
               </a>
             ) : null}
           </div>

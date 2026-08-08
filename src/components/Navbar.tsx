@@ -1,6 +1,6 @@
-import { useEffect, useState, Fragment } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Home, User, Code2, Briefcase, Shield, Compass, Mail, Moon, Sun, Zap } from 'lucide-react';
+import { Home, User, Code2, Briefcase, Shield, Compass, Mail, Moon, Sun } from 'lucide-react';
 
 const NAV = [
   { id: 'hero', label: 'Home', icon: Home },
@@ -14,10 +14,9 @@ const NAV = [
 
 interface NavbarProps {
   isIntroComplete?: boolean;
-  onOpenF1Game?: () => void;
 }
 
-export default function Navbar({ isIntroComplete = true, onOpenF1Game }: NavbarProps) {
+export default function Navbar({ isIntroComplete = true }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState('hero');
   const [indicator, setIndicator] = useState({ left: 0, width: 0 });
@@ -96,6 +95,8 @@ export default function Navbar({ isIntroComplete = true, onOpenF1Game }: NavbarP
     });
   };
 
+  const isLight = theme === 'light';
+
   return (
     <>
       <motion.nav
@@ -104,12 +105,18 @@ export default function Navbar({ isIntroComplete = true, onOpenF1Game }: NavbarP
         transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
         className={`hidden md:block fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-ferrari-carbon/90 backdrop-blur-xl shadow-black/20'
+            ? isLight
+              ? 'bg-white/95 backdrop-blur-[20px] shadow-sm text-[#111111]'
+              : 'bg-black/40 backdrop-blur-[20px] saturate-180 shadow-[0_8px_32px_rgba(0,0,0,0.4)]'
+            : isLight
+            ? 'bg-transparent text-[#111111]'
             : 'bg-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-          <div className="hidden md:flex items-center text-ferrari-smoke/70 font-mono text-xs uppercase tracking-[0.2em]">
+          <div className={`hidden md:flex items-center font-mono text-xs uppercase tracking-[0.2em] ${
+            isLight ? 'text-[#111111]/80 font-semibold' : 'text-ferrari-smoke/70'
+          }`}>
             Algiers, Algeria
           </div>
 
@@ -126,7 +133,9 @@ export default function Navbar({ isIntroComplete = true, onOpenF1Game }: NavbarP
                     go(n.id);
                   }}
                   className={`flex items-center gap-2 px-3 py-2 font-mono text-xs uppercase tracking-[0.2em] transition-colors ${
-                    active === n.id ? 'text-ferrari-gold' : 'text-ferrari-smoke/70 hover:text-ferrari-smoke'
+                    active === n.id
+                      ? isLight ? 'text-[#DC0000] font-bold' : 'text-ferrari-gold font-semibold'
+                      : isLight ? 'text-[#111111]/80 hover:text-[#111111] font-semibold' : 'text-ferrari-smoke/70 hover:text-ferrari-smoke'
                   }`}
                 >
                   {Icon ? <Icon size={14} className="opacity-80" /> : null}
@@ -142,23 +151,20 @@ export default function Navbar({ isIntroComplete = true, onOpenF1Game }: NavbarP
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <div className="hidden md:flex items-center text-ferrari-smoke/70 font-mono text-xs uppercase tracking-[0.2em]">
+            <div className={`hidden md:flex items-center font-mono text-xs uppercase tracking-[0.2em] ${
+              isLight ? 'text-[#111111]/80 font-semibold' : 'text-ferrari-smoke/70'
+            }`}>
               {time}
             </div>
             <button
               type="button"
-              onClick={onOpenF1Game}
-              aria-label="F1 Reaction Time Test"
-              title="F1 Reaction Time Test"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#E8002D]/40 bg-ferrari-carbon/90 text-[#E8002D] transition-all hover:bg-[#E8002D]/20 hover:scale-105"
-            >
-              <Zap size={18} />
-            </button>
-            <button
-              type="button"
               onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
               aria-label="Toggle theme"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-ferrari-pit-border/50 bg-ferrari-carbon/90 text-ferrari-smoke transition-colors hover:bg-ferrari-pit hover:text-ferrari-gold"
+              className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition-colors ${
+                isLight
+                  ? 'border-gray-300 bg-gray-100 text-[#111111] hover:bg-gray-200 hover:text-[#DC0000]'
+                  : 'border-white/10 bg-white/5 backdrop-blur-xl text-ferrari-smoke hover:bg-white/10 hover:text-ferrari-gold'
+              }`}
             >
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
@@ -171,38 +177,38 @@ export default function Navbar({ isIntroComplete = true, onOpenF1Game }: NavbarP
           isIntroComplete ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         }`}
       >
-        <div className="mx-auto flex max-w-fit items-center justify-center gap-0.5 rounded-full border border-ferrari-pit-border/50 bg-ferrari-carbon/90 px-2.5 py-1.5 backdrop-blur-xl shadow-black/20">
+        <div className={`mx-auto flex max-w-fit items-center justify-center gap-0.5 rounded-full border px-2.5 py-1.5 backdrop-blur-[20px] shadow-lg ${
+          isLight
+            ? 'bg-white/95 border-gray-300 text-[#111111]'
+            : 'bg-black/30 border-white/10 saturate-180 shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)]'
+        }`}>
           {NAV.map(({ id, label, icon: Icon }) => (
-            <Fragment key={id}>
-              <button
-                type="button"
-                onClick={() => go(id)}
-                aria-label={label}
-                className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors ${
-                  active === id ? 'bg-ferrari-red text-white' : 'text-ferrari-smoke/70 hover:bg-white/5 hover:text-ferrari-smoke'
-                }`}
-              >
-                <Icon size={15} />
-              </button>
-              {id === 'projects' && (
-                <button
-                  type="button"
-                  onClick={onOpenF1Game}
-                  aria-label="F1 Reaction Time Test"
-                  title="F1 Reaction Time Test"
-                  className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[#E8002D] hover:bg-[#E8002D]/15 transition-colors"
-                >
-                  <Zap size={15} />
-                </button>
-              )}
-            </Fragment>
+            <button
+              key={id}
+              type="button"
+              onClick={() => go(id)}
+              aria-label={label}
+              className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors ${
+                active === id
+                  ? 'bg-ferrari-red text-white'
+                  : isLight
+                  ? 'text-[#111111]/80 hover:bg-gray-100 hover:text-[#111111]'
+                  : 'text-ferrari-smoke/70 hover:bg-white/5 hover:text-ferrari-smoke'
+              }`}
+            >
+              <Icon size={15} />
+            </button>
           ))}
-          <div className="h-4 w-px bg-ferrari-smoke/20 mx-1 shrink-0" />
+          <div className={`h-4 w-px mx-1 shrink-0 ${isLight ? 'bg-gray-300' : 'bg-ferrari-smoke/20'}`} />
           <button
             type="button"
             onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
             aria-label="Toggle theme"
-            className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-ferrari-smoke/70 hover:bg-white/5 hover:text-ferrari-smoke transition-colors"
+            className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors ${
+              isLight
+                ? 'text-[#111111]/80 hover:bg-gray-100 hover:text-[#111111]'
+                : 'text-ferrari-smoke/70 hover:bg-white/5 hover:text-ferrari-smoke'
+            }`}
           >
             {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
           </button>

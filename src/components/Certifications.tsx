@@ -58,16 +58,19 @@ function CertCard({ cert, index }: { cert: Certification; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6, delay: index * 0.15, ease: [0.2, 0.8, 0.2, 1] }}
-      whileHover={{ y: -6 }}
-      className="group relative w-full bg-ferrari-pit border border-ferrari-pit-border rounded-lg overflow-hidden transition-all duration-300 hover:border-ferrari-red/60 hover:shadow-card-hover flex flex-col md:flex-row"
+      whileHover={{
+        y: -6,
+        transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
+      }}
+      className="group relative w-full spatial-glass rounded-2xl overflow-hidden transition-[border-color,box-shadow,opacity] duration-300 ease-out border border-white/10 hover:border-ferrari-red/50 hover:shadow-[0_16px_36px_rgba(0,0,0,0.5),0_0_25px_rgba(220,0,0,0.2)] flex flex-col md:flex-row"
       data-cursor="hover"
     >
       {/* 1. CERTIFICATE PREVIEW (LEFT SIDE: ~45% ON DESKTOP) */}
-      <div className="w-full md:w-[45%] relative overflow-hidden bg-ferrari-carbon border-b md:border-b-0 md:border-r border-ferrari-pit-border flex items-center justify-center min-h-[260px] md:min-h-[360px]">
+      <div className="cert-img-container w-full md:w-[45%] relative overflow-hidden bg-black/20 border-b md:border-b-0 md:border-r border-white/10 flex items-center justify-center min-h-[260px] md:min-h-[360px]">
         <img
           src={cert.imageUrl}
           alt={`${cert.title} Certificate`}
-          className="w-full h-full object-cover object-center block"
+          className="w-full h-full object-cover object-center block group-hover:scale-[1.025] transition-transform duration-500 ease-out"
         />
       </div>
 
@@ -92,7 +95,7 @@ function CertCard({ cert, index }: { cert: Certification; index: number }) {
           </h3>
 
           {/* Issued Date */}
-          <div className="my-4 p-3.5 px-4 rounded-md bg-ferrari-carbon/60 border border-ferrari-pit-border font-mono text-xs flex items-center justify-between">
+          <div className="cert-issued-box my-4 p-3.5 px-4 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 font-mono text-xs flex items-center justify-between">
             <span className="text-ferrari-smoke/60 uppercase tracking-wider text-[0.65rem]">Issued:</span>
             <span className="font-semibold text-ferrari-smoke">{cert.date}</span>
           </div>
@@ -102,7 +105,7 @@ function CertCard({ cert, index }: { cert: Certification; index: number }) {
             {cert.skills.map((skill) => (
               <span
                 key={skill}
-                className="px-3 py-1 font-mono text-[0.65rem] tracking-wider uppercase border border-ferrari-pit-border text-ferrari-smoke/80 rounded bg-ferrari-carbon/50"
+                className="cert-skill-badge px-3 py-1 font-mono text-[0.65rem] tracking-wider uppercase border border-white/10 text-ferrari-smoke/80 rounded-lg bg-white/5 backdrop-blur-md"
               >
                 {skill}
               </span>
@@ -111,12 +114,12 @@ function CertCard({ cert, index }: { cert: Certification; index: number }) {
         </div>
 
         {/* VERIFY Button */}
-        <div className="pt-4 border-t border-ferrari-pit-border flex items-center justify-between mt-auto">
+        <div className="cert-footer-divider pt-4 border-t border-white/10 flex items-center justify-between mt-auto">
           <a
             href={cert.verifyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2.5 px-6 py-2.5 rounded font-mono text-xs tracking-[0.2em] font-semibold uppercase text-white bg-ferrari-red hover:bg-ferrari-red-bright transition-all duration-300 shadow-red-glow group/btn"
+            className="inline-flex items-center justify-center gap-2.5 px-6 py-2.5 rounded-full font-mono text-xs tracking-[0.2em] font-semibold uppercase text-white bg-ferrari-red hover:bg-ferrari-red-bright transition-all duration-300 shadow-red-glow group/btn"
           >
             <span>VERIFY</span>
             <ExternalLink size={14} className="transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />

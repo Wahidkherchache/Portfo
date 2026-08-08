@@ -217,7 +217,7 @@ export default function F1ReactionModal({ isOpen, onClose }: F1ReactionModalProp
           {/* F1 Gantry Starting Lights */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-full bg-[#121212] border-2 border-[#262626] rounded-2xl p-6 sm:p-8 md:p-10 mb-8 shadow-[0_10px_40px_rgba(0,0,0,0.8)] relative"
+            className="w-full f1-gantry-box bg-[#121212] rounded-2xl p-6 sm:p-8 md:p-10 mb-8 border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.8)] relative"
           >
             {/* Gantry top beam */}
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#1f1f1f] border border-[#333] px-6 py-1 rounded-t-md text-[10px] text-white/40 tracking-[0.3em] uppercase">

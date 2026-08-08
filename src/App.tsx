@@ -37,13 +37,20 @@ function App() {
       <div className="noise-overlay" aria-hidden />
       <CustomCursor />
 
+      {/* Subtle floating background orbs */}
+      <div className="floating-orbs-container fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+        <div className="absolute top-[10%] -left-32 w-[550px] h-[550px] rounded-full bg-[#FF000033] blur-[120px] animate-float-orb-1" />
+        <div className="absolute top-[45%] -right-32 w-[650px] h-[650px] rounded-full bg-[#C9A84C22] blur-[140px] animate-float-orb-2" />
+        <div className="absolute top-[80%] left-[20%] w-[500px] h-[500px] rounded-full bg-[#FF000022] blur-[130px] animate-float-orb-1" />
+      </div>
+
       <AnimatePresence>
         {showLoader && <Loader key="loader" onComplete={() => setShowLoader(false)} />}
       </AnimatePresence>
 
       {showContent && (
         <>
-          <Navbar isIntroComplete={showContent} onOpenF1Game={() => setIsF1ModalOpen(true)} />
+          <Navbar isIntroComplete={showContent} />
           <main>
             <Hero onOpenF1Game={() => setIsF1ModalOpen(true)} />
             <About />

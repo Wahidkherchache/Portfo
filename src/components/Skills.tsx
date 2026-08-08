@@ -312,10 +312,10 @@ export default function Skills() {
         {/* Top Bar (LIVE SESSION / CONDITIONS) */}
         <motion.div
           {...riseIn(0.1)}
-          className={`mt-8 mb-6 rounded-xl p-3 md:p-4 flex flex-wrap items-center justify-between gap-4 font-mono text-xs shadow-xl border transition-colors ${
+          className={`mt-8 mb-6 rounded-2xl p-3 md:p-4 flex flex-wrap items-center justify-between gap-4 font-mono text-xs shadow-xl border transition-colors ${
             isLightMode
               ? 'bg-[#ffffff] border-[#e0e0e0] text-[#111111]'
-              : 'bg-[#121212] border-[#222222] text-gray-300'
+              : 'spatial-glass border-white/10 text-gray-300'
           }`}
         >
           <div className="flex items-center gap-4 flex-wrap">
@@ -395,23 +395,23 @@ export default function Skills() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7 }}
-            className={`lg:col-span-7 rounded-xl p-4 md:p-6 relative shadow-2xl overflow-hidden border transition-colors ${
-              isLightMode ? 'bg-[#f5f5f5] border-[#e0e0e0]' : 'bg-[#111111] border-[#222222]'
+            className={`lg:col-span-7 rounded-2xl p-4 md:p-6 relative shadow-2xl overflow-hidden border transition-colors ${
+              isLightMode ? 'bg-[#f5f5f5] border-[#e0e0e0]' : 'spatial-glass border-white/10'
             }`}
           >
             {/* Top decorative Ferrari red racing line */}
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 via-yellow-500 to-red-600" />
 
             <div className={`flex items-center justify-between mb-4 pb-2 border-b font-mono text-xs ${
-              isLightMode ? 'border-[#e0e0e0] text-[#111111]' : 'border-[#222222] text-gray-400'
+              isLightMode ? 'border-[#e0e0e0] text-[#111111]' : 'border-white/10 text-gray-400'
             }`}>
               <span className="font-semibold tracking-wider">MONZA</span>
               <span className={isLightMode ? 'text-[#666666] text-[0.7rem]' : 'text-gray-500 text-[0.7rem]'}>ITALY // AUTODROMO NAZIONALE MONZA</span>
             </div>
 
             {/* SVG Track Viewport: viewBox 0 0 1000 600 */}
-            <div className={`w-full relative aspect-[1000/600] rounded-lg border p-2 overflow-hidden shadow-inner transition-colors ${
-              isLightMode ? 'bg-[#f5f5f5] border-[#e0e0e0]' : 'bg-[#0A0A0A] border-[#1a1a1a]'
+            <div className={`w-full relative aspect-[1000/600] rounded-xl border p-2 overflow-hidden shadow-inner transition-colors ${
+              isLightMode ? 'bg-[#f5f5f5] border-[#e0e0e0]' : 'bg-black/30 border-white/10 backdrop-blur-md'
             }`}>
               <svg
                 viewBox="0 0 1000 600"
@@ -568,10 +568,10 @@ export default function Skills() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className={`lg:col-span-5 rounded-xl p-4 md:p-5 relative shadow-2xl flex flex-col justify-between border transition-colors ${
+            className={`lg:col-span-5 rounded-2xl p-4 md:p-5 relative shadow-2xl flex flex-col justify-between border transition-colors ${
               isLightMode
                 ? 'bg-white border-[#e0e0e0] text-[#111111]'
-                : 'bg-[#111111] border-[#222222] text-white'
+                : 'spatial-glass border-white/10 text-white'
             }`}
           >
             <div>

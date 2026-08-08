@@ -169,7 +169,7 @@ export default function Hero({ onOpenF1Game }: HeroProps = {}) {
               href="https://github.com/Wahidkherchache"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 border border-ferrari-pit-border text-ferrari-smoke/80 font-mono text-xs md:text-sm tracking-[0.2em] uppercase rounded-full hover:border-ferrari-gold hover:text-ferrari-gold transition-colors"
+              className="hero-secondary-btn inline-flex items-center gap-2 px-6 py-3.5 border border-white/10 text-ferrari-smoke/80 font-mono text-xs md:text-sm tracking-[0.2em] uppercase rounded-full hover:border-ferrari-gold hover:text-ferrari-gold transition-colors bg-white/5 backdrop-blur-md"
             >
               <Github size={16} />
               GitHub
@@ -179,7 +179,7 @@ export default function Hero({ onOpenF1Game }: HeroProps = {}) {
               href="https://www.linkedin.com/in/abdelouahid-kherchache"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 border border-ferrari-pit-border text-ferrari-smoke/80 font-mono text-xs md:text-sm tracking-[0.2em] uppercase rounded-full hover:border-ferrari-gold hover:text-ferrari-gold transition-colors"
+              className="hero-secondary-btn inline-flex items-center gap-2 px-6 py-3.5 border border-white/10 text-ferrari-smoke/80 font-mono text-xs md:text-sm tracking-[0.2em] uppercase rounded-full hover:border-ferrari-gold hover:text-ferrari-gold transition-colors bg-white/5 backdrop-blur-md"
             >
               <Linkedin size={16} />
               LinkedIn
@@ -189,7 +189,7 @@ export default function Hero({ onOpenF1Game }: HeroProps = {}) {
               href={CV_URL}
               onClick={handleCvDownload}
               download="Abdelouahid-Kherchache-CV.pdf"
-              className="inline-flex items-center gap-2 px-6 py-3.5 border border-ferrari-pit-border text-ferrari-smoke/80 font-mono text-xs md:text-sm tracking-[0.2em] uppercase rounded-full hover:border-ferrari-gold hover:text-ferrari-gold transition-colors"
+              className="hero-secondary-btn inline-flex items-center gap-2 px-6 py-3.5 border border-white/10 text-ferrari-smoke/80 font-mono text-xs md:text-sm tracking-[0.2em] uppercase rounded-full hover:border-ferrari-gold hover:text-ferrari-gold transition-colors bg-white/5 backdrop-blur-md"
             >
               <Download size={16} />
               Download CV
@@ -206,7 +206,7 @@ export default function Hero({ onOpenF1Game }: HeroProps = {}) {
             <button
               type="button"
               onClick={onOpenF1Game}
-              className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#E8002D] text-white font-mono text-xs md:text-sm tracking-wider uppercase rounded-full hover:bg-[#E8002D]/10 hover:shadow-[0_0_15px_rgba(232,0,45,0.4)] transition-all duration-300 group cursor-pointer"
+              className="hero-reaction-btn inline-flex items-center gap-2 px-5 py-2.5 border border-[#E8002D] font-mono text-xs md:text-sm tracking-wider uppercase rounded-full hover:bg-[#E8002D]/10 hover:shadow-[0_0_15px_rgba(232,0,45,0.4)] transition-all duration-300 group cursor-pointer"
             >
               <Zap size={16} className="text-[#E8002D] group-hover:scale-110 transition-transform" />
               <span>TEST YOUR REACTION TIME</span>
@@ -218,8 +218,10 @@ export default function Hero({ onOpenF1Game }: HeroProps = {}) {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: lightSwept ? 1 : 0, scale: lightSwept ? 1 : 0.8 }}
           transition={{ duration: 0.8, delay: 0.4, ease: [0.2, 0.8, 0.2, 1] }}
-          className="order-1 lg:order-2 mx-auto"
+          className="order-1 lg:order-2 mx-auto relative group"
         >
+          {/* Subtle glow behind RPM gauge */}
+          <div className="absolute -inset-6 rounded-full bg-gradient-to-tr from-[#E8002D]/25 via-[#C9A84C]/20 to-[#E8002D]/25 blur-2xl pointer-events-none animate-pulse" />
           <Speedometer />
         </motion.div>
       </div>
