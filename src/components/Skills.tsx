@@ -132,7 +132,9 @@ const TopDownF1Car: React.FC<{
 
 export default function Skills() {
   const pathRef = useRef<SVGPathElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
   const [speedMultiplier, setSpeedMultiplier] = useState(1);
   const [hoveredSkillId, setHoveredSkillId] = useState<string | null>(null);
 
@@ -143,6 +145,22 @@ export default function Skills() {
     }
     return false;
   });
+
+  // Intersection Observer to pause car animation when Skills section is off screen
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (typeof document === 'undefined') return;
@@ -183,7 +201,7 @@ export default function Skills() {
         lastTimeRef.current = timestamp;
       }
 
-      if (isPlaying && pathRef.current) {
+      if (isPlaying && isVisible && pathRef.current) {
         const totalLength = pathRef.current.getTotalLength();
         const delta = (timestamp - lastTimeRef.current) / 1000;
         lastTimeRef.current = timestamp;
@@ -233,7 +251,7 @@ export default function Skills() {
 
     animationFrameId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationFrameId);
-  }, [isPlaying, speedMultiplier]);
+  }, [isPlaying, isVisible, speedMultiplier]);
 
   // Reset grid handler
   const handleResetGrid = () => {
@@ -276,6 +294,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
+      ref={sectionRef}
       className={`relative py-20 md:py-28 overflow-hidden font-sans transition-colors duration-300 ${
         isLightMode ? 'bg-[#f5f5f5] text-[#111111]' : 'bg-[#0A0A0A] text-white'
       }`}

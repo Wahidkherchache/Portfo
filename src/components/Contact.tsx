@@ -63,7 +63,7 @@ export default function Contact() {
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-red-glow opacity-20 group-hover:opacity-40 transition-opacity" />
             <div className="relative flex items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-white/5 border border-ferrari-red/40 flex items-center justify-center group-hover:border-ferrari-red transition-colors shrink-0 backdrop-blur-md">
-                <Github size={22} className="text-ferrari-smoke group-hover:text-white transition-colors" />
+                <Github size={22} className="text-ferrari-smoke group-hover:text-white transition-colors comms-github-icon" />
               </div>
               <div className="min-w-0">
                 <div className="font-mono text-[0.65rem] tracking-[0.25em] text-ferrari-gold uppercase mb-1">
