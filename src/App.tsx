@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { AnimatePresence, MotionConfig } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import Loader from './components/Loader';
 import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
@@ -18,32 +18,6 @@ function App() {
   const [showContent, setShowContent] = useState(false);
   const [isF1ModalOpen, setIsF1ModalOpen] = useState(false);
 
-  const prefersReducedMotion =
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const [shouldReduceMotion, setShouldReduceMotion] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return prefersReducedMotion || window.matchMedia('(max-width: 768px)').matches;
-  });
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const mobileQuery = window.matchMedia('(max-width: 768px)');
-
-    const updateMotion = () => {
-      setShouldReduceMotion(mediaQuery.matches || mobileQuery.matches);
-    };
-
-    mediaQuery.addEventListener?.('change', updateMotion);
-    mobileQuery.addEventListener?.('change', updateMotion);
-    return () => {
-      mediaQuery.removeEventListener?.('change', updateMotion);
-      mobileQuery.removeEventListener?.('change', updateMotion);
-    };
-  }, []);
-
   useEffect(() => {
     if (showLoader) {
       document.body.style.overflow = 'hidden';
@@ -59,7 +33,7 @@ function App() {
   }, [showLoader]);
 
   return (
-    <MotionConfig reducedMotion={shouldReduceMotion ? 'always' : 'user'}>
+    <>
       <div className="noise-overlay" aria-hidden />
       <CustomCursor />
 
@@ -94,7 +68,7 @@ function App() {
           />
         </>
       )}
-    </MotionConfig>
+    </>
   );
 }
 
