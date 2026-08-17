@@ -44,11 +44,19 @@ html, body {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 70px;
 }
 
 section {
-  scroll-margin-top: 80px;
+  scroll-margin-top: 70px;
+}
+
+#contact {
+  margin-bottom: 0;
+}
+
+footer {
+  margin-bottom: 0;
 }
 
 body {
@@ -406,9 +414,7 @@ a, button {
   outline: none;
 }
 
-section {
-  scroll-margin-top: 5rem;
-}
+
 
 /* ============ Floating Orbs ============ */
 @keyframes float-orb-1 {
@@ -437,9 +443,49 @@ section {
   animation: float-orb-2 28s ease-in-out infinite;
 }
 
-@media (max-width: 768px) {
-  * {
+@media (max-width: 1100px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-liquid-nav {
+    display: flex !important;
+  }
+  main {
+    padding-bottom: 100px;
+  }
+  *:not(.apple-liquid-glass):not(.apple-liquid-glass *) {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
 }
+
+@media (min-width: 1101px) {
+  .desktop-nav {
+    display: block !important;
+  }
+  .mobile-liquid-nav {
+    display: none !important;
+  }
+}
+
+.apple-liquid-glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(40px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(40px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+}
+
+.light .apple-liquid-glass {
+  background: rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05) !important;
+}
+

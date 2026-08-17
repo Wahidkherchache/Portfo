@@ -3,7 +3,7 @@ import { Github, Heart } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="relative carbon-bg border-t border-ferrari-pit-border py-10 overflow-hidden">
+    <footer className="relative carbon-bg border-t border-ferrari-pit-border py-8 md:py-10 overflow-hidden mb-7">
       <div className="absolute inset-x-0 top-0 h-px bg-racing-stripe opacity-50" />
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">

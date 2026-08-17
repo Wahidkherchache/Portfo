@@ -19,7 +19,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-24 md:py-32 carbon-grid overflow-hidden">
+    <section id="contact" className="relative pt-20 pb-6 md:pt-28 md:pb-8 carbon-grid overflow-hidden">
       {/* radio static background */}
       <div
         className="absolute inset-0 pointer-events-none opacity-50"

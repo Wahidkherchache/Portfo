@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Home, User, Code2, Briefcase, Shield, Compass, Mail, Moon, Sun } from 'lucide-react';
 
 const NAV = [
@@ -83,7 +83,7 @@ export default function Navbar({ isIntroComplete = true }: NavbarProps) {
     const target = document.getElementById(id);
     if (!target) return;
 
-    const isMobile = window.innerWidth < 768;
+    const isMobile = window.innerWidth <= 1100;
     const nav = document.querySelector('nav');
     const headerHeight = isMobile ? 0 : (nav ? nav.getBoundingClientRect().height : 64);
     const targetPosition = target.getBoundingClientRect().top + window.scrollY;
@@ -103,7 +103,7 @@ export default function Navbar({ isIntroComplete = true }: NavbarProps) {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
-        className={`hidden md:block fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+        className={`desktop-nav fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
           scrolled
             ? isLight
               ? 'bg-white/95 backdrop-blur-[20px] shadow-sm text-[#111111]'
@@ -113,14 +113,14 @@ export default function Navbar({ isIntroComplete = true }: NavbarProps) {
             : 'bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-          <div className={`hidden md:flex items-center font-mono text-xs uppercase tracking-[0.2em] ${
+        <div className="max-w-7xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between gap-4">
+          <div className={`flex items-center font-mono text-xs uppercase tracking-[0.2em] shrink-0 ${
             isLight ? 'text-[#111111]/80 font-semibold' : 'text-ferrari-smoke/70'
           }`}>
             Algiers, Algeria
           </div>
 
-          <div className="hidden md:flex items-center relative gap-2">
+          <div className="flex items-center relative gap-1 xl:gap-1.5 flex-nowrap shrink-0">
             {NAV.map((n) => {
               const Icon = (n as any).icon as React.ComponentType<any> | undefined;
               return (
@@ -132,13 +132,13 @@ export default function Navbar({ isIntroComplete = true }: NavbarProps) {
                     e.preventDefault();
                     go(n.id);
                   }}
-                  className={`flex items-center gap-2 px-3 py-2 font-mono text-xs uppercase tracking-[0.2em] transition-colors ${
+                  className={`flex items-center gap-1.5 px-2 py-1 xl:px-2.5 xl:py-1.5 font-mono text-[11px] xl:text-xs uppercase tracking-[0.15em] xl:tracking-[0.2em] whitespace-nowrap shrink-0 transition-colors ${
                     active === n.id
                       ? isLight ? 'text-[#DC0000] font-bold' : 'text-ferrari-gold font-semibold'
                       : isLight ? 'text-[#111111]/80 hover:text-[#111111] font-semibold' : 'text-ferrari-smoke/70 hover:text-ferrari-smoke'
                   }`}
                 >
-                  {Icon ? <Icon size={14} className="opacity-80" /> : null}
+                  {Icon ? <Icon size={13} className="opacity-80 shrink-0" /> : null}
                   <span className="leading-none">{n.label}</span>
                 </a>
               );
@@ -150,8 +150,8 @@ export default function Navbar({ isIntroComplete = true }: NavbarProps) {
             />
           </div>
 
-          <div className="hidden md:flex items-center gap-4">
-            <div className={`hidden md:flex items-center font-mono text-xs uppercase tracking-[0.2em] ${
+          <div className="flex items-center gap-3 shrink-0">
+            <div className={`flex items-center font-mono text-xs uppercase tracking-[0.2em] shrink-0 ${
               isLight ? 'text-[#111111]/80 font-semibold' : 'text-ferrari-smoke/70'
             }`}>
               {time}
@@ -160,60 +160,99 @@ export default function Navbar({ isIntroComplete = true }: NavbarProps) {
               type="button"
               onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
               aria-label="Toggle theme"
-              className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition-colors ${
+              className={`inline-flex h-8 w-8 items-center justify-center rounded-full border transition-colors shrink-0 ${
                 isLight
                   ? 'border-gray-300 bg-gray-100 text-[#111111] hover:bg-gray-200 hover:text-[#DC0000]'
                   : 'border-white/10 bg-white/5 backdrop-blur-xl text-ferrari-smoke hover:bg-white/10 hover:text-ferrari-gold'
               }`}
             >
-              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+              {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
             </button>
           </div>
         </div>
       </motion.nav>
 
-      <div
-        className={`fixed inset-x-0 bottom-3 z-50 px-3 md:hidden transition-all duration-300 ${
-          isIntroComplete ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
-        }`}
-      >
-        <div className={`mx-auto flex max-w-fit items-center justify-center gap-0.5 rounded-full border px-2.5 py-1.5 backdrop-blur-[20px] shadow-lg ${
-          isLight
-            ? 'bg-white/95 border-gray-300 text-[#111111]'
-            : 'bg-black/30 border-white/10 saturate-180 shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)]'
-        }`}>
-          {NAV.map(({ id, label, icon: Icon }) => (
-            <button
-              key={id}
-              type="button"
-              onClick={() => go(id)}
-              aria-label={label}
-              className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors ${
-                active === id
-                  ? 'bg-ferrari-red text-white'
-                  : isLight
-                  ? 'text-[#111111]/80 hover:bg-gray-100 hover:text-[#111111]'
-                  : 'text-ferrari-smoke/70 hover:bg-white/5 hover:text-ferrari-smoke'
-              }`}
-            >
-              <Icon size={15} />
-            </button>
-          ))}
-          <div className={`h-4 w-px mx-1 shrink-0 ${isLight ? 'bg-gray-300' : 'bg-ferrari-smoke/20'}`} />
-          <button
-            type="button"
-            onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
-            aria-label="Toggle theme"
-            className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors ${
-              isLight
-                ? 'text-[#111111]/80 hover:bg-gray-100 hover:text-[#111111]'
-                : 'text-ferrari-smoke/70 hover:bg-white/5 hover:text-ferrari-smoke'
-            }`}
+      {/* Mobile Apple Liquid Glass Bottom Navigation Bar (iOS 26 Style) */}
+      <AnimatePresence>
+        {isIntroComplete && (
+          <motion.div
+            initial={{ y: 50, opacity: 0, x: '-50%' }}
+            animate={{ y: 0, opacity: 1, x: '-50%' }}
+            exit={{ y: 50, opacity: 0, x: '-50%' }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              position: 'fixed',
+              bottom: '15px',
+              left: '50%',
+              zIndex: 9999,
+              width: 'fit-content',
+              padding: '6px 12px',
+            }}
+            className="mobile-liquid-nav apple-liquid-glass flex items-center gap-0.5"
           >
-            {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
-          </button>
-        </div>
-      </div>
+            {NAV.map(({ id, label, icon: Icon }) => {
+              const isActive = active === id;
+              return (
+                <motion.button
+                  key={id}
+                  type="button"
+                  onClick={() => go(id)}
+                  aria-label={label}
+                  whileTap={{ scale: 0.85 }}
+                  className="relative flex items-center justify-center w-[30px] h-[30px] rounded-full cursor-pointer focus:outline-none shrink-0"
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="liquid-bubble"
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        backgroundColor: isLight ? 'rgba(0, 0, 0, 0.15)' : 'rgba(255, 255, 255, 0.3)',
+                        borderRadius: '50%',
+                      }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  <Icon
+                    size={isActive ? 17 : 15}
+                    className="relative z-10 transition-all duration-200"
+                    style={{
+                      color: isLight
+                        ? isActive
+                          ? 'rgba(0, 0, 0, 1.0)'
+                          : 'rgba(0, 0, 0, 0.6)'
+                        : isActive
+                          ? 'rgba(255, 255, 255, 1.0)'
+                          : 'rgba(255, 255, 255, 0.6)',
+                    }}
+                  />
+                </motion.button>
+              );
+            })}
+
+            <motion.button
+              type="button"
+              onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
+              aria-label="Toggle theme"
+              whileTap={{ scale: 0.85 }}
+              className="relative flex items-center justify-center w-[30px] h-[30px] rounded-full cursor-pointer focus:outline-none shrink-0"
+            >
+              {theme === 'dark' ? (
+                <Sun
+                  size={15}
+                  className="relative z-10 transition-all duration-200"
+                  style={{ color: 'rgba(255, 255, 255, 0.6)' }}
+                />
+              ) : (
+                <Moon
+                  size={15}
+                  className="relative z-10 transition-all duration-200"
+                  style={{ color: 'rgba(0, 0, 0, 0.6)' }}
+                />
+              )}
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
