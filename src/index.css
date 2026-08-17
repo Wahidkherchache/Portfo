@@ -468,6 +468,12 @@ a, button {
   }
 }
 
+body.modal-open .mobile-liquid-nav,
+body.modal-open .desktop-nav,
+.navbar-hidden {
+  display: none !important;
+}
+
 .apple-liquid-glass {
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(40px) saturate(200%) !important;

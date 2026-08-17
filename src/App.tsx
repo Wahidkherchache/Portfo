@@ -50,7 +50,7 @@ function App() {
 
       {showContent && (
         <>
-          <Navbar isIntroComplete={showContent} />
+          <Navbar isIntroComplete={showContent} isModalOpen={isF1ModalOpen} />
           <main className="pb-[100px] md:pb-0">
             <Hero onOpenF1Game={() => setIsF1ModalOpen(true)} />
             <About />

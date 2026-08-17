@@ -14,9 +14,16 @@ const NAV = [
 
 interface NavbarProps {
   isIntroComplete?: boolean;
+  hidden?: boolean;
+  isModalOpen?: boolean;
 }
 
-export default function Navbar({ isIntroComplete = true }: NavbarProps) {
+export default function Navbar({
+  isIntroComplete = true,
+  hidden = false,
+  isModalOpen = false,
+}: NavbarProps) {
+  const isHidden = hidden || isModalOpen;
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState('hero');
   const [indicator, setIndicator] = useState({ left: 0, width: 0 });
@@ -101,9 +108,11 @@ export default function Navbar({ isIntroComplete = true }: NavbarProps) {
     <>
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        animate={{ y: isHidden ? -100 : 0, opacity: isHidden ? 0 : 1 }}
         transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
         className={`desktop-nav fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+          isHidden ? 'navbar-hidden pointer-events-none' : ''
+        } ${
           scrolled
             ? isLight
               ? 'bg-white/95 backdrop-blur-[20px] shadow-sm text-[#111111]'
@@ -174,7 +183,7 @@ export default function Navbar({ isIntroComplete = true }: NavbarProps) {
 
       {/* Mobile Apple Liquid Glass Bottom Navigation Bar (iOS 26 Style) */}
       <AnimatePresence>
-        {isIntroComplete && (
+        {isIntroComplete && !isHidden && (
           <motion.div
             initial={{ y: 50, opacity: 0, x: '-50%' }}
             animate={{ y: 0, opacity: 1, x: '-50%' }}
@@ -188,7 +197,9 @@ export default function Navbar({ isIntroComplete = true }: NavbarProps) {
               width: 'fit-content',
               padding: '6px 12px',
             }}
-            className="mobile-liquid-nav apple-liquid-glass flex items-center gap-0.5"
+            className={`mobile-liquid-nav apple-liquid-glass flex items-center gap-0.5 ${
+              isHidden ? 'navbar-hidden' : ''
+            }`}
           >
             {NAV.map(({ id, label, icon: Icon }) => {
               const isActive = active === id;
