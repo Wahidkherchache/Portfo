@@ -109,9 +109,9 @@ export default function Loader({ onComplete }: LoaderProps) {
               <div className="font-mono text-xs md:text-sm text-ferrari-gold tracking-[0.3em] uppercase">
                 {label}
               </div>
-              <div className="font-display text-2xl md:text-3xl tracking-[0.4em] text-ferrari-smoke">
+              {/* <div className="font-display text-2xl md:text-3xl tracking-[0.4em] text-ferrari-smoke">
                 ABDELOUAHID KHERCHACHE
-              </div>
+              </div> */}
             </motion.div>
           )}
         </motion.div>
