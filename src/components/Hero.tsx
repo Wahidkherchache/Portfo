@@ -6,7 +6,7 @@ import SpeedLines from './SpeedLines';
 import { reduceMotion } from '../utils/motion';
 
 const ROLES = ['Developer', 'Problem Solver', 'F1 Fanatic', 'Future Hacker'];
-const CV_URL = `${import.meta.env.BASE_URL}Abdelouahid_Kherchache_CV.pdf`;
+const CV_URL = `${import.meta.env.BASE_URL}certificates/Cv/${encodeURIComponent('Abdelouahid_Kherchache_CV.pdf')}`;
 
 interface HeroProps {
   onOpenF1Game?: () => void;

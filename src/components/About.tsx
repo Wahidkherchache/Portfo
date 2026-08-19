@@ -98,11 +98,11 @@ export default function About() {
             <p className="text-ferrari-smoke/85 text-base md:text-lg leading-relaxed">
               I'm <span className="text-ferrari-gold font-semibold">Abd eloahid</span> — a computer
               science student at <span className="text-ferrari-red font-semibold">USTHB</span>,
-              Algiers, navigating from L2 to L3. I write code the way a race engineer
+              Algiers, L3. I write code the way a race engineer
               tunes a car: methodically, relentlessly, with an eye for the millisecond.
             </p>
             <p className="text-ferrari-smoke/65 text-sm md:text-base leading-relaxed">
-              My garage runs on <span className="text-ferrari-smoke">Java, C, JavaScript, React,
+              My garage runs on <span className="text-ferrari-smoke">Java, C, Next.js, JavaScript, TypeScript, React,
               Node.js, Oracle SQL,</span> and <span className="text-ferrari-smoke">Linux</span>. I'm
               equally comfortable wiring a backend, optimizing it, and trying to break
               into it — because secure code starts with thinking like the attacker.

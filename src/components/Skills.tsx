@@ -13,8 +13,9 @@ interface SkillCarConfig {
   iconClass: string;
 }
 
-// 12 Skills mapped to Real F1 Team Colors & Devicons
+// 13 Skills mapped to Real F1 Team Colors & Devicons
 const SKILL_CARS: SkillCarConfig[] = [
+  { id: 'nextjs', name: 'Next.js', lapTime: 34.0, color: '#000000', category: 'Frontend', iconClass: 'devicon-nextjs-plain colored' },     // Next.js (black)
   { id: 'react', name: 'React', lapTime: 35.0, color: '#E8002D', category: 'Frontend', iconClass: 'devicon-react-original colored' },        // Ferrari (red)
   { id: 'js', name: 'JavaScript', lapTime: 35.5, color: '#FF8000', category: 'Frontend', iconClass: 'devicon-javascript-plain colored' },     // McLaren (papaya orange)
   { id: 'html-css', name: 'HTML/CSS', lapTime: 36.0, color: '#3671C6', category: 'Frontend', iconClass: 'devicon-html5-plain colored' },   // Red Bull (dark blue)
