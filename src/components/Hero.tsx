@@ -206,7 +206,7 @@ export default function Hero({ onOpenF1Game }: HeroProps = {}) {
             <button
               type="button"
               onClick={onOpenF1Game}
-              className="hero-reaction-btn inline-flex items-center gap-2 px-5 py-2.5 border border-[#E8002D] font-mono text-xs md:text-sm tracking-wider uppercase rounded-full hover:bg-[#E8002D]/10 hover:shadow-[0_0_15px_rgba(232,0,45,0.4)] transition-all duration-300 group cursor-pointer"
+              className="hero-reaction-btn inline-flex items-center gap-2 px-5 py-2.5 border border-[#E8002D] font-mono text-xs md:text-sm tracking-wider uppercase rounded-full hover:bg-[#E8002D]/10 hover:shadow-[0_0_15px_rgba(232,0,45,0.4)] transition-all duration-300 group cursor-pointer font-bold"
             >
               <Zap size={16} className="text-[#E8002D] group-hover:scale-110 transition-transform" />
               <span>TEST YOUR REACTION TIME</span>
