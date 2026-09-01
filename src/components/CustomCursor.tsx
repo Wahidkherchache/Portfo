@@ -16,6 +16,7 @@ export default function CustomCursor() {
     let my = window.innerHeight / 2;
     let rx = mx;
     let ry = my;
+    let isHovering = false;
 
     const onMove = (e: MouseEvent) => {
       mx = e.clientX;
@@ -23,21 +24,24 @@ export default function CustomCursor() {
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${mx - 3}px, ${my - 3}px, 0)`;
       }
-      const t = e.target as HTMLElement;
-      const interactive = t.closest('a, button, [data-cursor="hover"]');
-      setHovering(!!interactive);
+      const t = e.target as HTMLElement | null;
+      const interactive = !!t?.closest('a, button, [data-cursor="hover"], input, textarea');
+      if (interactive !== isHovering) {
+        isHovering = interactive;
+        setHovering(interactive);
+      }
     };
 
     const loop = () => {
-      rx += (mx - rx) * 0.18;
-      ry += (my - ry) * 0.18;
+      rx += (mx - rx) * 0.2;
+      ry += (my - ry) * 0.2;
       if (ringRef.current) {
         ringRef.current.style.transform = `translate3d(${rx - 16}px, ${ry - 16}px, 0)`;
       }
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
-    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mousemove', onMove, { passive: true });
     return () => {
       window.removeEventListener('mousemove', onMove);
       cancelAnimationFrame(raf);

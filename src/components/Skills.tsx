@@ -192,6 +192,8 @@ export default function Skills() {
     }))
   );
 
+  const totalLengthRef = useRef<number>(0);
+
   // Continuous animation loop
   useEffect(() => {
     let animationFrameId: number;
@@ -203,8 +205,11 @@ export default function Skills() {
       }
 
       if (isPlaying && isVisible && pathRef.current) {
-        const totalLength = pathRef.current.getTotalLength();
-        const delta = (timestamp - lastTimeRef.current) / 1000;
+        if (!totalLengthRef.current) {
+          totalLengthRef.current = pathRef.current.getTotalLength();
+        }
+        const totalLength = totalLengthRef.current;
+        const delta = Math.min((timestamp - lastTimeRef.current) / 1000, 0.1);
         lastTimeRef.current = timestamp;
         pausedElapsedRef.current += delta * speedMultiplier;
 

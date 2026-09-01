@@ -191,15 +191,15 @@ body {
     box-shadow: inset 0 0 24px rgba(200, 168, 75, 0.03) !important;
   }
 
-  .light .cert-issued-box {
-    background-color: #f3f4f6 !important;
-    border-color: transparent !important;
+  /* ============ Certifications Light Mode ============ */
+  .light .cert-card {
+    background-color: #ffffff !important;
+    border-color: #e0e0e0 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02) !important;
   }
 
-  .light .cert-skill-badge {
-    background-color: #f3f4f6 !important;
-    border-color: transparent !important;
-    color: #111111 !important;
+  .light .cert-card:hover {
+    border-color: rgba(220, 0, 0, 0.5) !important;
   }
 
   .light .cert-img-container {
@@ -207,8 +207,90 @@ body {
     background-color: #f8fafc !important;
   }
 
+  .light .cert-issuer-badge {
+    background-color: #111111 !important;
+    color: #ffffff !important;
+    border-color: #333333 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  .light .cert-status-badge {
+    background-color: #E8002D !important;
+    color: #ffffff !important;
+    border-color: #E8002D !important;
+    box-shadow: 0 2px 8px rgba(232, 0, 45, 0.3) !important;
+  }
+
+  .light .cert-tag {
+    background-color: transparent !important;
+    border-color: #333333 !important;
+    color: #111111 !important;
+  }
+
   .light .cert-footer-divider {
-    border-color: transparent !important;
+    border-color: #e0e0e0 !important;
+  }
+
+  .light .cert-issued-box {
+    background-color: #ffffff !important;
+    border-color: #e0e0e0 !important;
+  }
+
+  .light .cert-issued-label {
+    color: #333333 !important;
+  }
+
+  .light .cert-date {
+    color: #111111 !important;
+  }
+
+  .light .cert-nav-btn-enabled {
+    border-color: #333333 !important;
+    background-color: #ffffff !important;
+    color: #111111 !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  .light .cert-nav-btn-enabled:hover {
+    border-color: #111111 !important;
+    background-color: #111111 !important;
+    color: #ffffff !important;
+  }
+
+  .light .cert-nav-btn-disabled {
+    border-color: #e0e0e0 !important;
+    background-color: #f3f4f6 !important;
+    color: #9ca3af !important;
+  }
+
+  .light .cert-dot-active {
+    background-color: #111111 !important;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.25) !important;
+  }
+
+  .light .cert-dot-inactive {
+    background-color: #333333 !important;
+    opacity: 0.35 !important;
+  }
+
+  .light .cert-dot-inactive:hover {
+    opacity: 0.75 !important;
+  }
+
+  .light .cert-status-divider {
+    border-color: #e0e0e0 !important;
+  }
+
+  .light .cert-status-text {
+    color: #333333 !important;
+  }
+
+  .light .cert-award-icon {
+    color: #9e7b1a !important;
+  }
+
+  .light .cert-academy-text {
+    color: #9e7b1a !important;
   }
 
   .light .f1-gantry-box {
@@ -419,27 +501,31 @@ a, button {
 /* ============ Floating Orbs ============ */
 @keyframes float-orb-1 {
   0%, 100% {
-    transform: translate(0px, 0px) scale(1);
+    transform: translate3d(0px, 0px, 0) scale(1);
   }
   50% {
-    transform: translate(120px, 90px) scale(1.2);
+    transform: translate3d(120px, 90px, 0) scale(1.2);
   }
 }
 
 @keyframes float-orb-2 {
   0%, 100% {
-    transform: translate(0px, 0px) scale(1);
+    transform: translate3d(0px, 0px, 0) scale(1);
   }
   50% {
-    transform: translate(-110px, -80px) scale(1.15);
+    transform: translate3d(-110px, -80px, 0) scale(1.15);
   }
 }
 
 .animate-float-orb-1 {
+  will-change: transform;
+  transform: translateZ(0);
   animation: float-orb-1 22s ease-in-out infinite;
 }
 
 .animate-float-orb-2 {
+  will-change: transform;
+  transform: translateZ(0);
   animation: float-orb-2 28s ease-in-out infinite;
 }
 
@@ -494,4 +580,35 @@ body.modal-open .desktop-nav,
     inset 0 1px 0 rgba(255, 255, 255, 0.6),
     inset 0 -1px 0 rgba(0, 0, 0, 0.05) !important;
 }
+
+/* ============ Certifications Carousel ============ */
+.certs-slider-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.cert-card-wrapper {
+  width: 100%;
+  min-width: 100%;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.cert-card {
+  width: 100%;
+  max-width: 100%;
+  box-shadow: none !important;
+}
+
+.light .f1-track-strip {
+  background-color: #e8e8e8 !important;
+  border-color: #d1d5db !important;
+}
+
+.light .f1-track-line {
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
 

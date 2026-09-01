@@ -1,22 +1,11 @@
-import { useState } from 'react';
-import type { FormEvent } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Mail, Radio, Send, Linkedin, CheckCircle2 } from 'lucide-react';
+import { Github, Mail, Radio, Send, Linkedin } from 'lucide-react';
 import SectionHeading from './SectionHeading';
 import { swipeIn, riseIn } from '../utils/motion';
 
 const EMAIL = 'wahidkherchache@gmail.com';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
-    setSubmitted(true);
-    setFormData({ name: '', email: '', message: '' });
-  };
 
   return (
     <section id="contact" className="relative pt-20 pb-6 md:pt-28 md:pb-8 carbon-grid overflow-hidden">
@@ -156,101 +145,15 @@ export default function Contact() {
           </motion.a>
         </div>
 
-        {/* Channel 04 - DIRECT COMMS (Contact Form) */}
+        {/* Channel 04 - DIRECT COMMS (Disabled until backend & database integration) */}
+        {/*
         <motion.div
           {...riseIn(0.2)}
           className="mt-8 spatial-glass rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-2xl group hover:border-ferrari-red/40 transition-colors"
         >
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-ferrari-red via-ferrari-gold to-ferrari-red" />
-
-          <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-4">
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-xs tracking-[0.25em] text-ferrari-gold uppercase">
-                Channel 04
-              </span>
-              <h3 className="font-display text-2xl md:text-3xl tracking-wide text-ferrari-smoke">
-                DIRECT COMMS
-              </h3>
-            </div>
-            <span className="font-mono text-[0.65rem] text-ferrari-smoke/40 tracking-widest uppercase hidden sm:inline-block">
-              [ PIT_WALL_RADIO ]
-            </span>
-          </div>
-
-          {submitted ? (
-            <div className="py-10 text-center space-y-4">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-ferrari-red/10 border border-ferrari-red text-ferrari-red mb-2">
-                <CheckCircle2 size={26} />
-              </div>
-              <h4 className="font-display text-2xl md:text-3xl text-ferrari-smoke tracking-wide">
-                TRANSMISSION SENT
-              </h4>
-              <p className="font-mono text-xs text-ferrari-smoke/60 max-w-md mx-auto">
-                Message received on the pit wall. I will respond to your transmission as soon as possible.
-              </p>
-              <button
-                type="button"
-                onClick={() => setSubmitted(false)}
-                className="mt-4 px-6 py-2.5 bg-white/5 border border-white/10 text-ferrari-gold font-mono text-xs uppercase tracking-wider rounded-full hover:border-ferrari-gold transition-colors backdrop-blur-md"
-              >
-                Send Another Transmission
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block font-mono text-xs text-ferrari-smoke/70 mb-1.5 uppercase tracking-wider">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Your Name"
-                    className="w-full bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-3 text-sm text-ferrari-smoke placeholder:text-ferrari-smoke/30 font-mono focus:outline-none focus:border-ferrari-gold transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block font-mono text-xs text-ferrari-smoke/70 mb-1.5 uppercase tracking-wider">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="your.email@domain.com"
-                    className="w-full bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-3 text-sm text-ferrari-smoke placeholder:text-ferrari-smoke/30 font-mono focus:outline-none focus:border-ferrari-gold transition-colors"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block font-mono text-xs text-ferrari-smoke/70 mb-1.5 uppercase tracking-wider">
-                  Message
-                </label>
-                <textarea
-                  required
-                  rows={4}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="State your transmission..."
-                  className="w-full bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-3 text-sm text-ferrari-smoke placeholder:text-ferrari-smoke/30 font-mono focus:outline-none focus:border-ferrari-gold transition-colors resize-none"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full group relative inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-ferrari-red text-white font-mono text-xs md:text-sm tracking-[0.2em] uppercase font-semibold rounded-full overflow-hidden transition-all hover:bg-ferrari-red-bright hover:shadow-red-glow"
-                data-cursor="hover"
-              >
-                <span className="absolute inset-0 bg-racing-stripe opacity-0 group-hover:opacity-30 transition-opacity" />
-                <span className="relative">TRANSMIT MESSAGE</span>
-                <Send size={16} className="relative transition-transform group-hover:translate-x-1" />
-              </button>
-            </form>
-          )}
+          ...
         </motion.div>
+        */}
 
         {/* Quote section */}
         <motion.blockquote
