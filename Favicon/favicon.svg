@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Outer Yellow Shield Base -->
+  <path d="M 256 2 L 510 72 C 510 350 400 480 256 510 C 112 480 2 350 2 72 Z" fill="#FFD700"/>
+
+  <!-- Red Shield Ring -->
+  <path d="M 256 28 L 480 90 C 480 330 380 452 256 482 C 132 452 32 330 32 90 Z" fill="#E10600"/>
+
+  <!-- Inner Black Shield Core -->
+  <path d="M 256 55 L 450 110 C 450 315 360 425 256 452 C 152 425 62 315 62 110 Z" fill="#121318"/>
+
+  <!-- Italian Tricolore Accent (Moved to Top) -->
+  <rect x="156" y="95" width="60" height="20" fill="#009246"/>
+  <rect x="216" y="95" width="80" height="20" fill="#FFFFFF"/>
+  <rect x="296" y="95" width="60" height="20" fill="#CE2B37"/>
+</svg>
